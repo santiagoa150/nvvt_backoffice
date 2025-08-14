@@ -1,3 +1,12 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
+import {authRoutes} from './auth/ui/auth.routes';
+import {campaignRoutes} from './campaigns/campaign.routes';
 
-export const routes: Routes = [];
+/**
+ * This file defines the routes for the application.
+ */
+export const routes: Routes = [
+  {path: 'campaign', children: campaignRoutes},
+  {path: 'auth', children: authRoutes},
+  {path: '', redirectTo: 'auth', pathMatch: 'full'}
+];
