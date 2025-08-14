@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 /**
  * This file defines the Campaign Detail Page component.
@@ -7,7 +7,6 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-campaign-detail-page',
   templateUrl: './campaign-detail.page.html',
-  styleUrl: './campaign-detail.page.scss'
+  styleUrl: './campaign-detail.page.scss',
 })
-export class CampaignDetailPage {
-}
+export class CampaignDetailPage {}

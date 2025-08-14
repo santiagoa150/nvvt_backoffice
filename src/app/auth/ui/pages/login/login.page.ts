@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
 /**
  * This file defines the Login Page component.
@@ -7,7 +7,6 @@ import {Component} from '@angular/core';
 @Component({
   selector: 'app-login-page',
   templateUrl: './login.page.html',
-  styleUrl: './login.page.scss'
+  styleUrl: './login.page.scss',
 })
-export class LoginPage {
-}
+export class LoginPage {}
