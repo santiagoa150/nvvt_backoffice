@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint",
-    "lint:scss": "stylelint \"src/**/*.scss\" --fix"
+    "lint:scss": "stylelint \"src/**/*.scss\" --fix",
+    "prepare": "husky install"
   },
   "prettier": {
     "printWidth": 100,
@@ -45,12 +46,14 @@
     "eslint": "^9.29.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
     "jasmine-core": "~5.8.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
     "stylelint": "^16.23.1",
     "stylelint-config-standard-scss": "^15.0.1",
@@ -63,5 +66,16 @@
     "node": "^22.17.0",
     "npm": "11.4.0",
     "yarn": "1.22.22"
+  },
+  "lint-staged": {
+    "**/*.{ts,js}": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{scss,css}": [
+      "stylelint --fix",
+      "git add"
+    ]
   }
 }
