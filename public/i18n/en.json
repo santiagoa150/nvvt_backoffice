@@ -1,6 +1,7 @@
 {
   "shared": {
-    "example": "Internationalized example text"
+    "example": "Internationalized example text",
+    "welcome": "Welcome to our application"
   },
   "auth": {
   },
