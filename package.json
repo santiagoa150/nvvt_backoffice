@@ -9,7 +9,7 @@
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"lint": "ng lint",
-		"lint:styles": "stylelint \"src/**/*.{scss,css}\" --fix --quiet",
+		"lint:styles": "stylelint \"src/**/*.{scss,css}\" --fix",
 		"prepare": "husky install",
 		"validate:18n": "node scripts/validate-i18n.js"
 	},

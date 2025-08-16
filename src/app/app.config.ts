@@ -9,6 +9,7 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguagesConstants } from './shared/domain/languages.constants';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -17,8 +18,8 @@ export const appConfig: ApplicationConfig = {
 		provideRouter(routes),
 		provideHttpClient(),
 		provideTranslateService({
-			fallbackLang: 'es',
-			lang: 'es',
+			fallbackLang: LanguagesConstants.ES,
+			lang: LanguagesConstants.ES,
 			loader: provideTranslateHttpLoader({
 				prefix: '/i18n/',
 				suffix: '.json',

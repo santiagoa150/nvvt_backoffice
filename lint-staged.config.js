@@ -2,7 +2,9 @@
 module.exports = {
 	'**/*.{ts,js}': ['eslint --fix', 'prettier --write'],
 	'**/*.{scss,css}': ['stylelint --fix'],
-	'public/i18n/*.json': ['npm run validate:18n'],
+	'public/i18n/*.json': () => {
+		return ['npm run validate:18n'];
+	},
 	'eslint.config.mjs': () => {
 		return ['eslint "src/**/*.{ts,js}" --fix', 'prettier --write .'];
 	},
