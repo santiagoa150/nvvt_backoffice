@@ -1,0 +1,13 @@
+{
+  "shared": {
+    "example": "Texto de ejemplo internacionalizado"
+  },
+  "auth": {
+  },
+  "campaigns": {
+  },
+  "clients": {
+  },
+  "orders": {
+  }
+}
