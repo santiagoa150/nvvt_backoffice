@@ -5,8 +5,8 @@ import { Component } from '@angular/core';
  * It is responsible for displaying a list of campaigns.
  */
 @Component({
-  selector: 'app-campaign-list-page',
-  templateUrl: './campaign-list.page.html',
-  styleUrl: './campaign-list.page.scss',
+	selector: 'app-campaign-list-page',
+	templateUrl: './campaign-list.page.html',
+	styleUrl: './campaign-list.page.scss',
 })
 export class CampaignListPage {}

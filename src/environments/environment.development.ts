@@ -3,5 +3,5 @@
  * It is used to set up the application for development purposes.
  */
 export const environment = {
-  production: false,
+	production: false,
 };
