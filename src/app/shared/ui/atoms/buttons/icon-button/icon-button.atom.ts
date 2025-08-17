@@ -1,0 +1,22 @@
+import { Component, input } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
+import { MatIconButton } from '@angular/material/button';
+import { NgClass } from '@angular/common';
+
+/** The allowed color types for the icon button. */
+type ColorTypes = 'primary' | 'primary-container';
+
+/**
+ * This file defines the IconButton Atom component.
+ * It is responsible for displaying an icon button with a specified icon and color.
+ */
+@Component({
+	selector: 'app-icon-button-atom',
+	templateUrl: './icon-button.atom.html',
+	styleUrls: ['./icon-button.atom.scss'],
+	imports: [MatIconButton, MatIcon, NgClass],
+})
+export class IconButtonAtom {
+	icon = input.required<string>();
+	color = input.required<ColorTypes>();
+}

@@ -6,7 +6,7 @@ module.exports = {
 	rules: {
 		'alpha-value-notation': 'number',
 		'at-rule-empty-line-before': 'always',
-		'at-rule-no-unknown': true,
+		'at-rule-no-unknown': null,
 		'block-no-empty': true,
 		'color-hex-length': 'long',
 		'color-no-invalid-hex': true,
@@ -23,6 +23,7 @@ module.exports = {
 		'no-duplicate-at-import-rules': true,
 		'no-duplicate-selectors': true,
 		'property-no-unknown': true,
+		'scss/at-rule-no-unknown': true,
 		'selector-pseudo-element-colon-notation': 'single',
 		'selector-type-case': 'lower',
 		'shorthand-property-no-redundant-values': true,
