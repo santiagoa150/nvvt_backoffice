@@ -17,6 +17,6 @@ type ColorTypes = 'primary' | 'primary-container';
 	imports: [MatIconButton, MatIcon, NgClass],
 })
 export class IconButtonAtom {
-	icon = input.required<string>();
-	color = input.required<ColorTypes>();
+	public readonly icon = input.required<string>();
+	public readonly color = input.required<ColorTypes>();
 }

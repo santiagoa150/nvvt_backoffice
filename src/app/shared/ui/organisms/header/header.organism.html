@@ -1,3 +1,10 @@
 <mat-toolbar id="app-header-organism" class="mat-elevation-z4">
-	<app-icon-button-atom icon="menu" color="primary-container"/>
+	<div>
+		@if (isLoggedIn) {
+			<app-icon-button-atom icon="menu" color="primary-container"/>
+		}
+	</div>
+	<div id="app-header-organism__actions">
+		<app-language-menu-molecule/>
+	</div>
 </mat-toolbar>

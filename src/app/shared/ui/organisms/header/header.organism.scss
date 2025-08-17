@@ -1,4 +1,13 @@
 #app-header-organism {
 	background-color: var(--mat-sys-primary-container);
 	color: var(--mat-sys-on-primary-container);
+	display: grid;
+	grid-template-columns: 90% 1fr;
+
+	&__actions {
+		display: flex;
+		width: 100%;
+		justify-content: right;
+		gap: 1rem;
+	}
 }

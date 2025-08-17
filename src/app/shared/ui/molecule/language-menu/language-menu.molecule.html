@@ -1,0 +1,8 @@
+<app-icon-button-atom icon="language" color="primary-container" [matMenuTriggerFor]="menu"/>
+<mat-menu #menu="matMenu">
+	@for (language of languages; track language) {
+		<button mat-menu-item (click)="changeLang(language)">
+			<span>{{ `shared.languages.${language}` | translate }}</span>
+		</button>
+	}
+</mat-menu>

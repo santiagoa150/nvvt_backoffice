@@ -1,14 +1,20 @@
 {
-  "shared": {
-    "example": "Texto de ejemplo internacionalizado",
-    "welcome": "Bienvenido a nuestra aplicación"
-  },
-  "auth": {
-  },
-  "campaigns": {
-  },
-  "clients": {
-  },
-  "orders": {
-  }
+	"shared": {
+		"languages": {
+			"en": "Inglés",
+			"es": "Español"
+		}
+	},
+	"auth": {
+		"hero-banner": {
+			"title": "Recibos fáciles para tu negocio Novaventa",
+			"subtitle": "Gestiona fácilmente los pagos y pedidos de tus clientes"
+		}
+	},
+	"campaigns": {
+	},
+	"clients": {
+	},
+	"orders": {
+	}
 }
