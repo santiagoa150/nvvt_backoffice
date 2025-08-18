@@ -1,13 +1,76 @@
 <div id="app-login-hero-banner">
 	<h1>{{ 'auth.hero-banner.title' | translate }}</h1>
 	<h2>{{ 'auth.hero-banner.subtitle' | translate }}</h2>
+	<app-rounded-button-atom
+		id="app-login-hero-banner__action"
+		color="surface"
+		(click)="onStartAction()"
+	>
+		{{ 'auth.hero-banner.button' | translate }}
+	</app-rounded-button-atom>
 </div>
-<div>
-
+<div id="app-login-info">
+	<div>
+		<h2>{{ 'auth.info.simplicity.title' | translate }}</h2>
+		<p>{{ 'auth.info.simplicity.description' | translate }}</p>
+	</div>
+	<div>
+		<h2>{{ 'auth.info.versatility.title' | translate }}</h2>
+		<p>{{ 'auth.info.versatility.description' | translate }}</p>
+	</div>
+	<div>
+		<h2>{{ 'auth.info.uncomplicated.title' | translate }}</h2>
+		<p>{{ 'auth.info.uncomplicated.description' | translate }}</p>
+	</div>
 </div>
 
-<p>Login Page</p>
-<p>{{ 'shared.example' | translate }}</p>
+<p>udhiahidiahf</p>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
 
-<button (click)="changeLang(LanguagesConstants.EN)">Change English</button>
-<button (click)="changeLang(LanguagesConstants.ES)">Cambiar Español</button>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+<h1>HOLA</h1>
+@if (!isLoggedIn) {
+	<div>
+		<h1>Welcome back!</h1>
+		<p>{{ 'auth.welcome-back' | translate }}</p>
+	</div>
+} @else {}

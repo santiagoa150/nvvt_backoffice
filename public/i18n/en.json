@@ -8,7 +8,22 @@
 	"auth": {
 		"hero-banner": {
 			"title": "Easy receipts for your Novaventa business",
-			"subtitle": "Easily manage your customers' payments and orders"
+			"subtitle": "Easily manage your customers' payments and orders",
+			"button": "Get started"
+		},
+		"info": {
+			"simplicity": {
+				"title": "Simple and practical",
+				"description": "Generate and organize your Novaventa customers' receipts in seconds. Easy to use, fast, and reliable for your business's daily operations."
+			},
+			"versatility": {
+				"title": "Versatile",
+				"description": "Manage payments and orders with tools that adapt to your workflow. Customize receipts according to your needs without complications."
+			},
+			"uncomplicated": {
+				"title": "Uncomplicated",
+				"description": "Designed to work right away, with no installations or complex configurations. Start from scratch or integrate it into your current sales method."
+			}
 		}
 	},
 	"campaigns": {

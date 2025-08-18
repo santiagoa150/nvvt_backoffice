@@ -3,6 +3,9 @@
 	color: var(--mat-sys-on-primary-container);
 	display: grid;
 	grid-template-columns: 90% 1fr;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
 
 	&__actions {
 		display: flex;

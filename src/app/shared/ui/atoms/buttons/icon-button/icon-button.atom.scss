@@ -1,7 +1,11 @@
-button, .primary {
+.primary {
 	color: var(--mat-sys-on-primary);
 }
 
-button, .primary-container {
+.primary-container {
 	color: var(--mat-sys-on-primary-container);
+}
+
+.surface {
+	color: var(--mat-sys-on-surface);
 }

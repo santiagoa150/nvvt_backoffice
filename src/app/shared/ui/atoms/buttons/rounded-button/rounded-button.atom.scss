@@ -1,0 +1,32 @@
+button {
+	border: 0;
+	padding: 12px 30px;
+	font-size: 1rem;
+	font-weight: bold;
+	border-radius: 50px;
+	box-shadow: 1.5px 1.5px 1.5px rgb(128 128 128 / 0.3);
+	cursor: pointer;
+	transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.primary {
+	background-color: var(--mat-sys-primary);
+	color: var(--mat-sys-on-primary);
+}
+
+.primary-container {
+	background-color: var(--mat-sys-primary-container);
+	color: var(--mat-sys-on-primary-container);
+}
+
+.surface {
+	background-color: var(--mat-sys-surface);
+	color: var(--mat-sys-on-primary-container);
+}
+
+.surface:hover {
+	background-color: var(--mat-sys-surface-container);
+	color: var(--mat-sys-on-surface-container);
+	box-shadow: 3px 3px 8px rgb(128 128 128 / 0.25);
+}
+

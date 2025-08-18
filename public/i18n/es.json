@@ -8,7 +8,22 @@
 	"auth": {
 		"hero-banner": {
 			"title": "Recibos fáciles para tu negocio Novaventa",
-			"subtitle": "Gestiona fácilmente los pagos y pedidos de tus clientes"
+			"subtitle": "Gestiona fácilmente los pagos y pedidos de tus clientes",
+			"button": "Empezar"
+		},
+		"info": {
+			"simplicity": {
+				"title": "Simple y práctico",
+				"description": "Genera y organiza los recibos de tus clientes de Novaventa en segundos. Fácil de usar, rápido y confiable para el día a día de tu negocio."
+			},
+			"versatility": {
+				"title": "Versátil",
+				"description": "Gestiona pagos y pedidos con herramientas que se adaptan a tu flujo de trabajo. Personaliza los recibos según tus necesidades sin complicaciones."
+			},
+			"uncomplicated": {
+				"title": "Sin complicaciones",
+				"description": "Pensado para que funcione directamente, sin instalaciones ni configuraciones complejas. Empieza desde cero o intégralo a tu método actual de ventas."
+			}
 		}
 	},
 	"campaigns": {

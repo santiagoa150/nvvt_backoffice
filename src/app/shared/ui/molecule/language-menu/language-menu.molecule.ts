@@ -7,6 +7,10 @@ import { TranslateRepository } from '../../../domain/repository/translate.reposi
 import { SharedInjectionTokens } from '../../../shared.injection-tokens';
 import { SharedProviders } from '../../../shared.providers';
 
+/**
+ * This file defines the LanguageMenu Molecule component.
+ * It is responsible for displaying a menu that allows users to select a language.
+ */
 @Component({
 	selector: 'app-language-menu-molecule',
 	templateUrl: './language-menu.molecule.html',

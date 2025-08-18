@@ -14,23 +14,63 @@
 
 	h1 {
 		font-size: 3rem;
-		line-height: 2.5rem;
+		line-height: 2.9rem;
+		margin: 10px;
 	}
 
 	h2 {
 		font-weight: normal;
+		margin: 10px;
+	}
+
+	&__action {
+		margin-top: 80px;
 	}
 }
 
 #app-login-hero-banner:before {
 	content: "";
 	position: absolute;
-	top: -20%;
+	top: -5%;
 	right: 20%;
-	width: 500px;
-	height: 500px;
+	width: 400px;
+	height: 400px;
 	background: url(#{"/images/icon.png"}) no-repeat center;
 	background-size: contain;
 	z-index: -1;
 	opacity: 0.7;
+}
+
+#app-login-info {
+	box-sizing: border-box;
+	padding: 75px 25px 25px;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	height: 400px;
+	column-gap: 70px;
+
+	div {
+		width: 300px;
+		color: var(--mat-sys-secondary);
+
+		h2 {
+			font-size: 2rem;
+			line-height: 2.5rem;
+			margin-bottom: 30px;
+		}
+
+		p {
+			font-size: 1rem;
+			line-height: 1.8rem;
+		}
+	}
+}
+
+@media (width <= 48rem) {
+	#app-login-info {
+		height: 700px;
+		align-items: center;
+		flex-flow: column;
+	}
 }
