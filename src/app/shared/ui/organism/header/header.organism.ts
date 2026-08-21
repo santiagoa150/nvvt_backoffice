@@ -31,7 +31,7 @@ export class HeaderOrganism {
 		{ initialValue: this.router.url },
 	);
 
-	protected readonly isLandingPage = computed(() => this.currentUrl() === '/');
+	protected readonly isLandingPage = computed(() => this.currentUrl().split('#')[0] === '/');
 	protected readonly landingNavLinks: LandingNavLink[] = [
 		{ id: 'hero', labelKey: 'landing.nav.hero' },
 		{ id: 'features', labelKey: 'landing.nav.features' },
