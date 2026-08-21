@@ -1,8 +1,16 @@
-<app-icon-button-atom icon="language" color="primary-container" [matMenuTriggerFor]="menu"/>
-<mat-menu #menu="matMenu">
-	@for (language of languages; track language) {
-		<button mat-menu-item (click)="changeLang(language)">
-			<span>{{ `shared.languages.${language}` | translate }}</span>
+<div class="relative">
+	<app-icon-button-atom icon="language" color="primary-container" (click)="toggleMenu()" />
+	@if (isOpen()) {
+	<div class="absolute right-0 z-10 mt-1 min-w-32 rounded-lg bg-white py-1 shadow-lg">
+		@for (language of languages; track language) {
+		<button
+			type="button"
+			class="block w-full cursor-pointer px-4 py-2 text-left text-sm text-secondary-700 hover:bg-secondary-50"
+			(click)="changeLang(language)"
+		>
+			{{ `shared.languages.${language}` | translate }}
 		</button>
+		}
+	</div>
 	}
-</mat-menu>
+</div>

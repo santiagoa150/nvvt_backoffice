@@ -1,6 +1,6 @@
 import { SharedProvidersConstants } from './shared.providers.constants';
 import { Provider } from '@angular/core';
-import { NgxTranslateRepository } from './infrastructure/ngx-translate/ngx-translate.repository';
+import { NgxTranslateAdapter } from './infra/adapter/i18n/ngx-translate.adapter';
 import { SharedInjectionTokens } from './shared.injection-tokens';
 
 /**
@@ -10,6 +10,6 @@ import { SharedInjectionTokens } from './shared.injection-tokens';
 export const SharedProviders: Record<SharedProvidersConstants, Provider> = {
 	[SharedProvidersConstants.TRANSLATE_REPOSITORY]: {
 		provide: SharedInjectionTokens.TRANSLATE_REPOSITORY,
-		useClass: NgxTranslateRepository,
+		useClass: NgxTranslateAdapter,
 	},
 };

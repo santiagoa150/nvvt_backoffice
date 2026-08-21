@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { IconButtonAtom } from '../../atoms/buttons/icon-button/icon-button.atom';
-import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { Component, inject, signal } from '@angular/core';
+import { IconButtonAtom } from '../../atom/button/icon-button/icon-button.atom';
 import { LanguagesConstants } from '../../../domain/languages.constants';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TranslateRepository } from '../../../domain/repository/translate.repository';
@@ -14,7 +13,7 @@ import { SharedProviders } from '../../../shared.providers';
 @Component({
 	selector: 'app-language-menu-molecule',
 	templateUrl: './language-menu.molecule.html',
-	imports: [IconButtonAtom, MatMenuTrigger, MatMenu, TranslatePipe, MatMenuItem],
+	imports: [IconButtonAtom, TranslatePipe],
 	providers: [SharedProviders.TRANSLATE_REPOSITORY],
 })
 export class LanguageMenuMolecule {
@@ -23,6 +22,14 @@ export class LanguageMenuMolecule {
 	);
 
 	protected readonly languages: LanguagesConstants[] = Object.values(LanguagesConstants);
+	protected readonly isOpen = signal(false);
+
+	/**
+	 * This method is called when the user toggles the language menu open or closed.
+	 */
+	protected toggleMenu(): void {
+		this.isOpen.update((current) => !current);
+	}
 
 	/**
 	 * This method is called when the user selects a language from the menu.
@@ -30,5 +37,6 @@ export class LanguageMenuMolecule {
 	 */
 	protected changeLang(language: LanguagesConstants): void {
 		this._translateRepository.changeLang(language);
+		this.isOpen.set(false);
 	}
 }

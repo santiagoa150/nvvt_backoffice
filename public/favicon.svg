@@ -1,0 +1,22 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Novaventa">
+	<path
+		d="M130,0 L382,0 A130,130 0 0 1 512,130 L512,512 L130,512 A130,130 0 0 1 0,382 L0,130 A130,130 0 0 1 130,0 Z"
+		fill="#833030"
+	/>
+	<g transform="translate(16.5,-24.5)">
+		<g fill="#ce7878" stroke="#692626" stroke-width="3" stroke-linejoin="round">
+			<path transform="translate(240,300) rotate(0)" d="M0,0 C-58,-63 -49.3,-144 0,-180 C49.3,-144 58,-63 0,0 Z" />
+			<path transform="translate(240,300) rotate(72)" d="M0,0 C-58,-63 -49.3,-144 0,-180 C49.3,-144 58,-63 0,0 Z" />
+			<path transform="translate(240,300) rotate(144)" d="M0,0 C-58,-63 -49.3,-144 0,-180 C49.3,-144 58,-63 0,0 Z" />
+			<path transform="translate(240,300) rotate(216)" d="M0,0 C-58,-63 -49.3,-144 0,-180 C49.3,-144 58,-63 0,0 Z" />
+			<path transform="translate(240,300) rotate(288)" d="M0,0 C-58,-63 -49.3,-144 0,-180 C49.3,-144 58,-63 0,0 Z" />
+		</g>
+		<g fill="#eccbcb" stroke="#833030" stroke-width="2.5" stroke-linejoin="round">
+			<path transform="translate(300,210) rotate(36)" d="M0,0 C-40,-40.25 -34,-92 0,-115 C34,-92 40,-40.25 0,0 Z" />
+			<path transform="translate(300,210) rotate(108)" d="M0,0 C-40,-40.25 -34,-92 0,-115 C34,-92 40,-40.25 0,0 Z" />
+			<path transform="translate(300,210) rotate(180)" d="M0,0 C-40,-40.25 -34,-92 0,-115 C34,-92 40,-40.25 0,0 Z" />
+			<path transform="translate(300,210) rotate(252)" d="M0,0 C-40,-40.25 -34,-92 0,-115 C34,-92 40,-40.25 0,0 Z" />
+			<path transform="translate(300,210) rotate(324)" d="M0,0 C-40,-40.25 -34,-92 0,-115 C34,-92 40,-40.25 0,0 Z" />
+		</g>
+	</g>
+</svg>

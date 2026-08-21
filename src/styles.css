@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: 'Nunito', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+	/* Primary — brick red, anchored at 600 on the exact hex provided (#943636). */
+	--color-primary-50: #fbf4f4;
+	--color-primary-100: #f5e5e5;
+	--color-primary-200: #eccbcb;
+	--color-primary-300: #dea5a5;
+	--color-primary-400: #ce7878;
+	--color-primary-500: #be4c4c;
+	--color-primary-600: #943636;
+	--color-primary-700: #833030;
+	--color-primary-800: #692626;
+	--color-primary-900: #521e1e;
+	--color-primary-950: #311212;
+
+	/* Secondary — ochre/caramel, anchored at 600 on the exact hex provided (#B26B2F). */
+	--color-secondary-50: #fcf7f3;
+	--color-secondary-100: #f8ece3;
+	--color-secondary-200: #f0dac6;
+	--color-secondary-300: #e5bf9e;
+	--color-secondary-400: #d99f6e;
+	--color-secondary-500: #cc7f3d;
+	--color-secondary-600: #b26b2f;
+	--color-secondary-700: #8d5525;
+	--color-secondary-800: #71441e;
+	--color-secondary-900: #593517;
+	--color-secondary-950: #34200e;
+
+	/* Accent — dark coffee brown, anchored at 800 on the exact hex provided (#54332B). */
+	--color-accent-50: #faf6f5;
+	--color-accent-100: #f3eae7;
+	--color-accent-200: #e7d4d0;
+	--color-accent-300: #d6b6ae;
+	--color-accent-400: #c19186;
+	--color-accent-500: #ac6c5d;
+	--color-accent-600: #91584a;
+	--color-accent-700: #76483c;
+	--color-accent-800: #54332b;
+	--color-accent-900: #4a2d26;
+	--color-accent-950: #2c1b16;
+}
+
+html,
+body {
+	height: 100%;
+	margin: 0;
+	font-family: var(--font-sans);
+}

@@ -5,8 +5,8 @@
 			"es": "Español"
 		}
 	},
-	"auth": {
-		"hero-banner": {
+	"landing": {
+		"hero": {
 			"title": "Recibos fáciles para tu negocio Novaventa",
 			"subtitle": "Gestiona fácilmente los pagos y pedidos de tus clientes",
 			"button": "Empezar"
@@ -24,6 +24,11 @@
 				"title": "Sin complicaciones",
 				"description": "Pensado para que funcione directamente, sin instalaciones ni configuraciones complejas. Empieza desde cero o intégralo a tu método actual de ventas."
 			}
+		},
+		"cta": {
+			"title": "Empieza a organizar tus recibos hoy",
+			"subtitle": "Sin instalaciones ni configuraciones complejas.",
+			"button": "Ver campañas"
 		}
 	},
 	"campaigns": {

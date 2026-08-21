@@ -1,12 +1,11 @@
 import { Routes } from '@angular/router';
-import { authRoutes } from './auth/ui/auth.routes';
-import { campaignRoutes } from './campaigns/campaign.routes';
+import { campaignRoutes } from './context/campaigns/campaign.routes';
+import { LandingPage } from './shared/ui/page/landing/landing.page';
 
 /**
  * This file defines the routes for the application.
  */
 export const routes: Routes = [
-	{ path: 'auth', children: authRoutes },
+	{ path: '', component: LandingPage, pathMatch: 'full' },
 	{ path: 'campaign', children: campaignRoutes },
-	{ path: '', redirectTo: 'auth', pathMatch: 'full' },
 ];
