@@ -12,4 +12,6 @@ import { RoundedButtonAtom } from '../../atom/button/rounded-button/rounded-butt
 	templateUrl: './landing.page.html',
 	imports: [RouterLink, TranslatePipe, RoundedButtonAtom],
 })
-export class LandingPage {}
+export class LandingPage {
+	protected readonly currentYear = new Date().getFullYear();
+}

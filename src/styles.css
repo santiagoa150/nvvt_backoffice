@@ -49,3 +49,12 @@ body {
 	margin: 0;
 	font-family: var(--font-sans);
 }
+
+html {
+	scroll-behavior: smooth;
+}
+
+.bg-hero-pattern {
+	background-image: radial-gradient(circle at 1px 1px, rgb(82 30 30 / 0.12) 1.5px, transparent 0);
+	background-size: 24px 24px;
+}

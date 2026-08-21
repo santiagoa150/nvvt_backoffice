@@ -25,10 +25,19 @@
 				"description": "Designed to work right away, with no installations or complex configurations. Start from scratch or integrate it into your current sales method."
 			}
 		},
-		"cta": {
-			"title": "Start organizing your receipts today",
-			"subtitle": "No installations or complex configurations.",
-			"button": "View campaigns"
+		"features": {
+			"eyebrow": "Benefits",
+			"title": "Everything you need to sell more",
+			"subtitle": "Simple tools built for the daily hustle of your catalog business."
+		},
+		"nav": {
+			"hero": "Home",
+			"features": "Benefits",
+			"footer": "Contact"
+		},
+		"footer": {
+			"backToTop": "Back to top",
+			"copyright": "© {{year}} Novaventa. All rights reserved."
 		}
 	},
 	"campaigns": {

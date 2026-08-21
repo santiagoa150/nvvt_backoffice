@@ -25,10 +25,19 @@
 				"description": "Pensado para que funcione directamente, sin instalaciones ni configuraciones complejas. Empieza desde cero o intégralo a tu método actual de ventas."
 			}
 		},
-		"cta": {
-			"title": "Empieza a organizar tus recibos hoy",
-			"subtitle": "Sin instalaciones ni configuraciones complejas.",
-			"button": "Ver campañas"
+		"features": {
+			"eyebrow": "Beneficios",
+			"title": "Todo lo que necesitas para vender más",
+			"subtitle": "Herramientas simples pensadas para el día a día de tu negocio de catálogo."
+		},
+		"nav": {
+			"hero": "Inicio",
+			"features": "Beneficios",
+			"footer": "Contacto"
+		},
+		"footer": {
+			"backToTop": "Volver arriba",
+			"copyright": "© {{year}} Novaventa. Todos los derechos reservados."
 		}
 	},
 	"campaigns": {
