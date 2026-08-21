@@ -19,5 +19,5 @@ export class IconButtonAtom {
 const COLOR_CLASSES: Record<ColorTypes, string> = {
 	primary: 'text-primary-600',
 	'primary-container': 'text-primary-900',
-	surface: 'text-secondary-700',
+	surface: 'text-neutral-800',
 };

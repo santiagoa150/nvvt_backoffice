@@ -1,0 +1,54 @@
+<section class="bg-hero-pattern flex min-h-screen flex-col items-center justify-center bg-primary-100 px-6 py-12">
+	<div class="w-full max-w-sm rounded-2xl bg-white p-8 shadow-xl">
+		<h1 class="text-3xl font-bold text-primary-900">{{ 'login.title' | translate }}</h1>
+		<p class="mt-1 text-base text-neutral-600">{{ 'login.subtitle' | translate }}</p>
+
+		<form class="mt-6 flex flex-col gap-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+			<div class="flex flex-col gap-1.5">
+				<label for="email" class="text-base font-bold text-neutral-800"
+					>{{ 'login.email.label' | translate }}</label
+				>
+				<input
+					id="email"
+					type="email"
+					formControlName="email"
+					autocomplete="email"
+					placeholder="{{ 'login.email.placeholder' | translate }}"
+					class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black placeholder:text-neutral-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
+				/>
+				@if (form.controls.email.invalid && form.controls.email.touched) {
+				<p class="text-sm text-primary-600">{{ 'login.email.error' | translate }}</p>
+				}
+			</div>
+
+			<div class="flex flex-col gap-1.5">
+				<label for="password" class="text-base font-bold text-neutral-800"
+					>{{ 'login.password.label' | translate }}</label
+				>
+				<input
+					id="password"
+					type="password"
+					formControlName="password"
+					autocomplete="current-password"
+					placeholder="{{ 'login.password.placeholder' | translate }}"
+					class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black placeholder:text-neutral-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
+				/>
+				@if (form.controls.password.invalid && form.controls.password.touched) {
+				<p class="text-sm text-primary-600">{{ 'login.password.error' | translate }}</p>
+				}
+			</div>
+
+			@if (hasError()) {
+			<p class="text-base text-primary-600">{{ 'login.invalidCredentials' | translate }}</p>
+			}
+
+			<app-rounded-button-atom type="submit" color="primary" [disabled]="isSubmitting()" class="mt-2 text-center">
+				{{ (isSubmitting() ? 'login.submitting' : 'login.submit') | translate }}
+			</app-rounded-button-atom>
+		</form>
+
+		<a routerLink="/" class="mt-6 block text-center text-base text-neutral-500 hover:text-primary-600">
+			{{ 'login.backToHome' | translate }}
+		</a>
+	</div>
+</section>

@@ -10,6 +10,8 @@ import { ColorTypes } from '../../../constant/color-types';
 })
 export class RoundedButtonAtom {
 	public readonly color = input.required<ColorTypes>();
+	public readonly type = input<'button' | 'submit'>('button');
+	public readonly disabled = input(false);
 
 	protected readonly colorClasses = computed(() => COLOR_CLASSES[this.color()]);
 }

@@ -3,7 +3,26 @@
 		"languages": {
 			"en": "English",
 			"es": "Spanish"
-		}
+		},
+		"login": "Login"
+	},
+	"login": {
+		"title": "Login",
+		"subtitle": "Enter your details to continue.",
+		"email": {
+			"label": "Email",
+			"placeholder": "youremail@example.com",
+			"error": "Enter a valid email"
+		},
+		"password": {
+			"label": "Password",
+			"placeholder": "••••••••",
+			"error": "Enter your password"
+		},
+		"submit": "Sign in",
+		"submitting": "Signing in...",
+		"invalidCredentials": "Incorrect email or password.",
+		"backToHome": "Back to home"
 	},
 	"landing": {
 		"hero": {

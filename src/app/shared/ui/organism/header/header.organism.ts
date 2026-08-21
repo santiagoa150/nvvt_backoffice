@@ -1,8 +1,8 @@
-import { Component, computed, inject } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { NavigationEnd, Router, RouterLink } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { filter, map } from 'rxjs';
+import { TokenRepository } from '../../../domain/repository/token.repository';
+import { SharedInjectionTokens } from '../../../shared.injection-tokens';
 import { LanguageMenuMolecule } from '../../molecule/language-menu/language-menu.molecule';
 
 interface LandingNavLink {
@@ -12,8 +12,8 @@ interface LandingNavLink {
 
 /**
  * This file defines the Header Organism component.
- * It is responsible for displaying the header of the application, including
- * section navigation links when the user is on the landing page.
+ * It is responsible for displaying the landing page's header, including
+ * its section navigation links.
  */
 @Component({
 	selector: 'app-header-organism',
@@ -21,17 +21,9 @@ interface LandingNavLink {
 	imports: [RouterLink, LanguageMenuMolecule, TranslatePipe],
 })
 export class HeaderOrganism {
-	private readonly router = inject(Router);
+	private readonly tokenRepository = inject<TokenRepository>(SharedInjectionTokens.TOKEN_REPOSITORY);
 
-	private readonly currentUrl = toSignal(
-		this.router.events.pipe(
-			filter((event) => event instanceof NavigationEnd),
-			map(() => this.router.url),
-		),
-		{ initialValue: this.router.url },
-	);
-
-	protected readonly isLandingPage = computed(() => this.currentUrl().split('#')[0] === '/');
+	protected readonly hasSession = this.tokenRepository.hasSession();
 	protected readonly landingNavLinks: LandingNavLink[] = [
 		{ id: 'hero', labelKey: 'landing.nav.hero' },
 		{ id: 'features', labelKey: 'landing.nav.features' },

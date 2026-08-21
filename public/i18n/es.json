@@ -3,7 +3,26 @@
 		"languages": {
 			"en": "Inglés",
 			"es": "Español"
-		}
+		},
+		"login": "Iniciar sesión"
+	},
+	"login": {
+		"title": "Iniciar sesión",
+		"subtitle": "Ingresa tus datos para continuar.",
+		"email": {
+			"label": "Correo",
+			"placeholder": "tucorreo@ejemplo.com",
+			"error": "Ingresa un correo válido"
+		},
+		"password": {
+			"label": "Contraseña",
+			"placeholder": "••••••••",
+			"error": "Ingresa tu contraseña"
+		},
+		"submit": "Ingresar",
+		"submitting": "Ingresando...",
+		"invalidCredentials": "Correo o contraseña incorrectos.",
+		"backToHome": "Volver al inicio"
 	},
 	"landing": {
 		"hero": {

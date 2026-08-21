@@ -9,4 +9,6 @@ export const SharedInjectionTokens: Record<SharedProvidersConstants, InjectionTo
 	[SharedProvidersConstants.TRANSLATE_REPOSITORY]: new InjectionToken<unknown>(
 		SharedProvidersConstants.TRANSLATE_REPOSITORY,
 	),
+	[SharedProvidersConstants.TOKEN_REPOSITORY]: new InjectionToken<unknown>(SharedProvidersConstants.TOKEN_REPOSITORY),
+	[SharedProvidersConstants.AUTH_REPOSITORY]: new InjectionToken<unknown>(SharedProvidersConstants.AUTH_REPOSITORY),
 };

@@ -1,18 +1,24 @@
-<header
-	class="sticky top-0 z-50 flex h-16 items-center justify-between border-b-2 border-accent-400 bg-primary-100 px-6 shadow-sm"
->
-	<a routerLink="/" class="text-xl font-bold tracking-wide text-primary-900">Novaventa</a>
-	@if (isLandingPage()) {
+<header class="sticky top-0 z-50 flex h-16 items-center justify-between bg-primary-100 px-6 shadow-md">
+	<a routerLink="/" class="text-2xl font-bold tracking-wide text-primary-900">Novaventa</a>
 	<nav class="hidden items-center gap-6 sm:flex">
 		@for (link of landingNavLinks; track link.id) {
 		<a
 			[href]="'#' + link.id"
-			class="text-sm font-semibold text-primary-800 transition-colors hover:text-primary-600"
+			class="rounded-full px-3 py-1.5 text-base font-semibold text-primary-800 transition hover:bg-black/5 hover:text-primary-600"
 		>
 			{{ link.labelKey | translate }}
 		</a>
 		}
 	</nav>
-	}
-	<app-language-menu-molecule />
+	<div class="flex items-center gap-4">
+		@if (!hasSession) {
+		<a
+			routerLink="/login"
+			class="rounded-full px-3 py-1.5 text-base font-semibold text-primary-800 transition hover:bg-black/5 hover:text-primary-600"
+		>
+			{{ 'shared.login' | translate }}
+		</a>
+		}
+		<app-language-menu-molecule />
+	</div>
 </header>
