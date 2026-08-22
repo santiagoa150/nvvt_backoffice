@@ -29,6 +29,12 @@
 					<app-loading-spinner-atom />
 				</td>
 			</tr>
+			} @else if (isEmpty()) {
+			<tr [style.height.px]="bodyHeightPx()">
+				<td colspan="4" class="text-center align-middle">
+					<app-empty-campaigns-molecule />
+				</td>
+			</tr>
 			} @else { @for (campaign of campaigns(); track campaign.campaignId) {
 			<tr class="border-t border-neutral-200" [style.height.px]="rowHeightPx">
 				<td class="truncate px-4 py-3 text-sm text-black">{{ campaign.name }}</td>

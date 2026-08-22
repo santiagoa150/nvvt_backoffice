@@ -77,7 +77,7 @@
 			"help": "Aquí puedes ver y administrar todas tus campañas.",
 			"create": "Crear campaña",
 			"loading": "Cargando campañas...",
-			"empty": "Aún no tienes campañas.",
+			"empty": "No hay campañas",
 			"viewAction": "Ver detalle",
 			"table": {
 				"name": "Nombre",

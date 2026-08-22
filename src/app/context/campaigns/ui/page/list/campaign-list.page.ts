@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RoundedButtonAtom } from '../../../../../shared/ui/atom/button/rounded-button/rounded-button.atom';
 import { LoadingSpinnerAtom } from '../../../../../shared/ui/atom/loading-spinner/loading-spinner.atom';
@@ -10,6 +10,7 @@ import { Campaign } from '../../../domain/campaign';
 import { CampaignRepository } from '../../../domain/repository/campaign.repository';
 import { CampaignCardMolecule } from '../../molecule/campaign-card/campaign-card.molecule';
 import { CampaignTableMolecule } from '../../molecule/campaign-table/campaign-table.molecule';
+import { EmptyCampaignsMolecule } from '../../molecule/empty-campaigns/empty-campaigns.molecule';
 
 const PAGE_SIZE = 10;
 
@@ -29,6 +30,7 @@ const PAGE_SIZE = 10;
 		PaginatorOrganism,
 		CampaignTableMolecule,
 		CampaignCardMolecule,
+		EmptyCampaignsMolecule,
 	],
 	providers: [CampaignProviders.CAMPAIGN_REPOSITORY],
 })
@@ -40,6 +42,7 @@ export class CampaignListPage {
 	protected readonly page = signal(1);
 	protected readonly totalPages = signal(1);
 	protected readonly isLoading = signal(true);
+	protected readonly isEmpty = computed(() => !this.isLoading() && this.campaigns().length === 0);
 
 	constructor() {
 		this.fetchCampaigns(this.page());
@@ -59,7 +62,7 @@ export class CampaignListPage {
 		this.campaignRepository.getPaginated(page, PAGE_SIZE).subscribe({
 			next: (result) => {
 				this.campaigns.set(result.data);
-				this.totalPages.set(result.metadata.totalPages);
+				this.totalPages.set(Math.max(1, result.metadata.totalPages));
 				this.isLoading.set(false);
 			},
 			error: () => {
