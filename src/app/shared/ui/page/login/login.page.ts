@@ -29,6 +29,14 @@ export class LoginPage {
 
 	protected readonly isSubmitting = signal(false);
 	protected readonly hasError = signal(false);
+	protected readonly isPasswordVisible = signal(false);
+
+	/**
+	 * This method is called when the user toggles the password visibility button.
+	 */
+	protected togglePasswordVisibility(): void {
+		this.isPasswordVisible.update((isVisible) => !isVisible);
+	}
 
 	/**
 	 * This method is called when the user submits the login form.

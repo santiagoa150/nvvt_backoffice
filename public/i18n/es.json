@@ -34,7 +34,9 @@
 		"password": {
 			"label": "Contraseña",
 			"placeholder": "••••••••",
-			"error": "Ingresa tu contraseña"
+			"error": "Ingresa tu contraseña",
+			"show": "Mostrar contraseña",
+			"hide": "Ocultar contraseña"
 		},
 		"submit": "Ingresar",
 		"submitting": "Ingresando...",

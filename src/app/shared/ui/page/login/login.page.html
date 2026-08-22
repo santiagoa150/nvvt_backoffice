@@ -25,14 +25,26 @@
 				<label for="password" class="text-base font-bold text-neutral-800"
 					>{{ 'login.password.label' | translate }}</label
 				>
-				<input
-					id="password"
-					type="password"
-					formControlName="password"
-					autocomplete="current-password"
-					placeholder="{{ 'login.password.placeholder' | translate }}"
-					class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black placeholder:text-neutral-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
-				/>
+				<div class="relative">
+					<input
+						id="password"
+						[type]="isPasswordVisible() ? 'text' : 'password'"
+						formControlName="password"
+						autocomplete="current-password"
+						placeholder="{{ 'login.password.placeholder' | translate }}"
+						class="w-full rounded-lg border border-neutral-300 px-4 py-2.5 pr-11 text-black placeholder:text-neutral-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
+					/>
+					<button
+						type="button"
+						class="absolute inset-y-0 right-0 flex cursor-pointer items-center px-3 text-neutral-500 hover:text-neutral-700"
+						[attr.aria-label]="(isPasswordVisible() ? 'login.password.hide' : 'login.password.show') | translate"
+						(click)="togglePasswordVisibility()"
+					>
+						<span class="material-icons text-xl"
+							>{{ isPasswordVisible() ? 'visibility_off' : 'visibility' }}</span
+						>
+					</button>
+				</div>
 				@if (form.controls.password.invalid && form.controls.password.touched) {
 				<p class="text-sm text-primary-600">{{ 'login.password.error' | translate }}</p>
 				}
