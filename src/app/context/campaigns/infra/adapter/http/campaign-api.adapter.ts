@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClientAdapter } from '../../../../../shared/infra/adapter/http/http-client.adapter';
 import { Pagination } from '../../../../../shared/domain/pagination';
-import { Campaign, CreateCampaign } from '../../../domain/campaign';
+import { Campaign, CampaignStatus, CreateCampaign } from '../../../domain/campaign';
 import { CampaignRepository } from '../../../domain/repository/campaign.repository';
 
 interface CampaignResponse {
@@ -10,7 +10,7 @@ interface CampaignResponse {
 	readonly name: string;
 	readonly year: number;
 	readonly number: number;
-	readonly is_active: boolean;
+	readonly status: CampaignStatus;
 }
 
 interface PaginationResponse<T> {
@@ -40,7 +40,7 @@ export class CampaignApiAdapter implements CampaignRepository {
 			name: campaign.name,
 			year: campaign.year,
 			number: campaign.number,
-			is_active: campaign.isActive,
+			status: campaign.status,
 		});
 	}
 
@@ -61,7 +61,7 @@ export class CampaignApiAdapter implements CampaignRepository {
 			name: response.name,
 			year: response.year,
 			number: response.number,
-			isActive: response.is_active,
+			status: response.status,
 		};
 	}
 }

@@ -5,6 +5,7 @@ import { AppError } from '../../../../../shared/domain/error/exception';
 import { RoundedButtonAtom } from '../../../../../shared/ui/atom/button/rounded-button/rounded-button.atom';
 import { ModalOrganism } from '../../../../../shared/ui/organism/modal/modal.organism';
 import { CampaignInjectionTokens } from '../../../campaign.injection-tokens';
+import { CampaignStatus } from '../../../domain/campaign';
 import { CampaignRepository } from '../../../domain/repository/campaign.repository';
 
 const CURRENT_YEAR = new Date().getFullYear();
@@ -64,12 +65,14 @@ export class CreateCampaignModalOrganism {
 		this.submitError.set(null);
 		this.isSubmitting.set(true);
 
+		const status: CampaignStatus = isActive ? 'ACTIVE' : 'SCHEDULED';
+
 		this.campaignRepository
 			.create({
 				name: name ?? '',
 				year: year ?? CURRENT_YEAR,
 				number: number ?? MIN_NUMBER,
-				isActive: isActive ?? false,
+				status,
 			})
 			.subscribe({
 				next: () => {
