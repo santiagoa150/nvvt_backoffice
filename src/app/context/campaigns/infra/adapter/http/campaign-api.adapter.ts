@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClientAdapter } from '../../../../../shared/infra/adapter/http/http-client.adapter';
 import { Pagination } from '../../../../../shared/domain/pagination';
-import { Campaign } from '../../../domain/campaign';
+import { Campaign, CreateCampaign } from '../../../domain/campaign';
 import { CampaignRepository } from '../../../domain/repository/campaign.repository';
 
 interface CampaignResponse {
@@ -10,6 +10,7 @@ interface CampaignResponse {
 	readonly name: string;
 	readonly year: number;
 	readonly number: number;
+	readonly is_active: boolean;
 }
 
 interface PaginationResponse<T> {
@@ -22,7 +23,7 @@ interface PaginationResponse<T> {
 }
 
 /**
- * Adapter for campaign read operations against the campaigns API.
+ * Adapter for campaign operations against the campaigns API.
  */
 @Injectable({ providedIn: 'root' })
 export class CampaignApiAdapter implements CampaignRepository {
@@ -32,6 +33,15 @@ export class CampaignApiAdapter implements CampaignRepository {
 		return this.http
 			.get<PaginationResponse<CampaignResponse>>('/campaigns/', { params: { page, limit } })
 			.pipe(map((response) => this.toPagination(response)));
+	}
+
+	create(campaign: CreateCampaign): Observable<void> {
+		return this.http.post<void>('/campaigns/', {
+			name: campaign.name,
+			year: campaign.year,
+			number: campaign.number,
+			is_active: campaign.isActive,
+		});
 	}
 
 	private toPagination(response: PaginationResponse<CampaignResponse>): Pagination<Campaign> {
@@ -51,6 +61,7 @@ export class CampaignApiAdapter implements CampaignRepository {
 			name: response.name,
 			year: response.year,
 			number: response.number,
+			isActive: response.is_active,
 		};
 	}
 }

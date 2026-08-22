@@ -4,7 +4,7 @@
 			[title]="'campaigns.list.title' | translate"
 			[description]="'campaigns.list.description' | translate"
 		>
-			<app-rounded-button-atom color="primary">
+			<app-rounded-button-atom color="primary" (click)="isCreateModalOpen.set(true)">
 				{{ 'campaigns.list.create' | translate }}
 			</app-rounded-button-atom>
 		</app-page-header-molecule>
@@ -42,3 +42,7 @@
 		</div>
 	</div>
 </div>
+
+@if (isCreateModalOpen()) {
+<app-create-campaign-modal-organism (created)="onCampaignCreated()" (dismiss)="isCreateModalOpen.set(false)" />
+}

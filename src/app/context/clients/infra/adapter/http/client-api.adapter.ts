@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { HttpClientAdapter } from '../../../../../shared/infra/adapter/http/http-client.adapter';
 import { Pagination } from '../../../../../shared/domain/pagination';
-import { Client } from '../../../domain/client';
+import { Client, CreateClient } from '../../../domain/client';
 import { ClientRepository } from '../../../domain/repository/client.repository';
 
 interface ClientPhoneResponse {
@@ -37,6 +37,15 @@ export class ClientApiAdapter implements ClientRepository {
 		return this.http
 			.get<PaginationResponse<ClientResponse>>('/clients/', { params: { page, limit } })
 			.pipe(map((response) => this.toPagination(response)));
+	}
+
+	create(client: CreateClient): Observable<void> {
+		return this.http.post<void>('/clients/', {
+			given_names: client.givenNames,
+			family_names: client.familyNames,
+			phone_number: client.phoneNumber,
+			country_phone_code: client.countryPhoneCode,
+		});
 	}
 
 	private toPagination(response: PaginationResponse<ClientResponse>): Pagination<Client> {

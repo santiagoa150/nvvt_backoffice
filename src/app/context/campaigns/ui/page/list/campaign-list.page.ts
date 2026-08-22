@@ -11,6 +11,7 @@ import { CampaignRepository } from '../../../domain/repository/campaign.reposito
 import { CampaignCardMolecule } from '../../molecule/campaign-card/campaign-card.molecule';
 import { CampaignTableMolecule } from '../../molecule/campaign-table/campaign-table.molecule';
 import { EmptyCampaignsMolecule } from '../../molecule/empty-campaigns/empty-campaigns.molecule';
+import { CreateCampaignModalOrganism } from '../../organism/create-campaign-modal/create-campaign-modal.organism';
 
 const PAGE_SIZE = 10;
 
@@ -31,6 +32,7 @@ const PAGE_SIZE = 10;
 		CampaignTableMolecule,
 		CampaignCardMolecule,
 		EmptyCampaignsMolecule,
+		CreateCampaignModalOrganism,
 	],
 	providers: [CampaignProviders.CAMPAIGN_REPOSITORY],
 })
@@ -43,6 +45,7 @@ export class CampaignListPage {
 	protected readonly totalPages = signal(1);
 	protected readonly isLoading = signal(true);
 	protected readonly isEmpty = computed(() => !this.isLoading() && this.campaigns().length === 0);
+	protected readonly isCreateModalOpen = signal(false);
 
 	constructor() {
 		this.fetchCampaigns(this.page());
@@ -55,6 +58,16 @@ export class CampaignListPage {
 	protected onPageChange(page: number): void {
 		this.page.set(page);
 		this.fetchCampaigns(page);
+	}
+
+	/**
+	 * This method is called when a new campaign was created through the modal.
+	 * It closes the modal and refreshes the list from the first page.
+	 */
+	protected onCampaignCreated(): void {
+		this.isCreateModalOpen.set(false);
+		this.page.set(1);
+		this.fetchCampaigns(1);
 	}
 
 	private fetchCampaigns(page: number): void {

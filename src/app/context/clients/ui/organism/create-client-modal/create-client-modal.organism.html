@@ -1,0 +1,81 @@
+<app-modal-organism (backdropClick)="dismiss.emit()">
+	<h2 class="text-2xl font-bold text-primary-900">{{ 'clients.createModal.title' | translate }}</h2>
+
+	<form class="mt-4 flex flex-col gap-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+		<div class="flex flex-col gap-1.5">
+			<label for="client-given-names" class="text-base font-bold text-neutral-800">
+				{{ 'clients.createModal.givenNames.label' | translate }}
+			</label>
+			<input
+				id="client-given-names"
+				type="text"
+				formControlName="givenNames"
+				class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
+			/>
+			@if (form.controls.givenNames.invalid && form.controls.givenNames.touched) {
+			<p class="text-sm text-primary-600">{{ 'clients.createModal.givenNames.error' | translate }}</p>
+			}
+		</div>
+
+		<div class="flex flex-col gap-1.5">
+			<label for="client-family-names" class="text-base font-bold text-neutral-800">
+				{{ 'clients.createModal.familyNames.label' | translate }}
+			</label>
+			<input
+				id="client-family-names"
+				type="text"
+				formControlName="familyNames"
+				class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
+			/>
+		</div>
+
+		<div class="flex gap-3">
+			<div class="flex w-1/3 flex-col gap-1.5">
+				<label for="client-country-code" class="text-base font-bold text-neutral-800">
+					{{ 'clients.createModal.countryPhoneCode.label' | translate }}
+				</label>
+				<input
+					id="client-country-code"
+					type="number"
+					formControlName="countryPhoneCode"
+					[min]="minCountryCode"
+					[max]="maxCountryCode"
+					class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
+				/>
+			</div>
+			<div class="flex flex-1 flex-col gap-1.5">
+				<label for="client-phone-number" class="text-base font-bold text-neutral-800">
+					{{ 'clients.createModal.phoneNumber.label' | translate }}
+				</label>
+				<input
+					id="client-phone-number"
+					type="text"
+					formControlName="phoneNumber"
+					class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
+				/>
+			</div>
+		</div>
+		@if ((form.controls.countryPhoneCode.touched || form.controls.phoneNumber.touched) &&
+		(form.errors?.['phonePairIncomplete'] || form.controls.phoneNumber.errors?.['pattern'])) {
+		<p class="text-sm text-primary-600">{{ 'clients.createModal.phone.error' | translate }}</p>
+		}
+
+		<label class="flex cursor-pointer items-start gap-2">
+			<input type="checkbox" formControlName="confirm" class="mt-1 h-4 w-4 accent-primary-600" />
+			<span class="text-base text-neutral-800">{{ 'clients.createModal.confirm.label' | translate }}</span>
+		</label>
+
+		@if (errorMessage()) {
+		<p class="text-base text-primary-600">{{ errorMessage() }}</p>
+		}
+
+		<div class="mt-2 flex justify-end gap-3">
+			<app-rounded-button-atom type="button" color="surface" (click)="dismiss.emit()">
+				{{ 'clients.createModal.cancel' | translate }}
+			</app-rounded-button-atom>
+			<app-rounded-button-atom type="submit" color="primary" [disabled]="form.invalid || isSubmitting()">
+				{{ (isSubmitting() ? 'clients.createModal.submitting' : 'clients.createModal.submit') | translate }}
+			</app-rounded-button-atom>
+		</div>
+	</form>
+</app-modal-organism>

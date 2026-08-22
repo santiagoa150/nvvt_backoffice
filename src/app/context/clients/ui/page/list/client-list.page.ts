@@ -11,6 +11,7 @@ import { ClientRepository } from '../../../domain/repository/client.repository';
 import { ClientCardMolecule } from '../../molecule/client-card/client-card.molecule';
 import { ClientTableMolecule } from '../../molecule/client-table/client-table.molecule';
 import { EmptyClientsMolecule } from '../../molecule/empty-clients/empty-clients.molecule';
+import { CreateClientModalOrganism } from '../../organism/create-client-modal/create-client-modal.organism';
 
 const PAGE_SIZE = 10;
 
@@ -31,6 +32,7 @@ const PAGE_SIZE = 10;
 		ClientTableMolecule,
 		ClientCardMolecule,
 		EmptyClientsMolecule,
+		CreateClientModalOrganism,
 	],
 	providers: [ClientProviders.CLIENT_REPOSITORY],
 })
@@ -43,6 +45,7 @@ export class ClientListPage {
 	protected readonly totalPages = signal(1);
 	protected readonly isLoading = signal(true);
 	protected readonly isEmpty = computed(() => !this.isLoading() && this.clients().length === 0);
+	protected readonly isCreateModalOpen = signal(false);
 
 	constructor() {
 		this.fetchClients(this.page());
@@ -55,6 +58,16 @@ export class ClientListPage {
 	protected onPageChange(page: number): void {
 		this.page.set(page);
 		this.fetchClients(page);
+	}
+
+	/**
+	 * This method is called when a new client was created through the modal.
+	 * It closes the modal and refreshes the list from the first page.
+	 */
+	protected onClientCreated(): void {
+		this.isCreateModalOpen.set(false);
+		this.page.set(1);
+		this.fetchClients(1);
 	}
 
 	private fetchClients(page: number): void {

@@ -86,6 +86,34 @@
 				"number": "Número",
 				"actions": "Acciones"
 			}
+		},
+		"createModal": {
+			"title": "Crear campaña",
+			"name": {
+				"label": "Nombre",
+				"error": "Ingresa un nombre"
+			},
+			"year": {
+				"label": "Año",
+				"error": "El año debe estar entre {{min}} y {{max}}"
+			},
+			"number": {
+				"label": "Número",
+				"error": "El número debe estar entre {{min}} y {{max}}"
+			},
+			"isActive": {
+				"label": "Marcar como campaña activa"
+			},
+			"confirm": {
+				"label": "¿Estás seguro que quieres crear una campaña con estos datos?"
+			},
+			"errors": {
+				"activeCampaignAlreadyExists": "Ya existe una campaña activa. Debes desactivarla antes de crear una nueva campaña activa.",
+				"yearNumberAlreadyExists": "Ya existe una campaña con el año {{year}} y el número {{number}}."
+			},
+			"cancel": "Cancelar",
+			"submit": "Crear",
+			"submitting": "Creando..."
 		}
 	},
 	"clients": {
@@ -100,6 +128,31 @@
 				"phone": "Teléfono",
 				"actions": "Acciones"
 			}
+		},
+		"createModal": {
+			"title": "Crear cliente",
+			"givenNames": {
+				"label": "Nombres",
+				"error": "Ingresa los nombres"
+			},
+			"familyNames": {
+				"label": "Apellidos"
+			},
+			"countryPhoneCode": {
+				"label": "Código"
+			},
+			"phoneNumber": {
+				"label": "Teléfono"
+			},
+			"phone": {
+				"error": "Ingresa un código de país y un número de teléfono válidos (7 a 12 dígitos), o deja ambos campos vacíos"
+			},
+			"confirm": {
+				"label": "¿Estás seguro que quieres crear un cliente con estos datos?"
+			},
+			"cancel": "Cancelar",
+			"submit": "Crear",
+			"submitting": "Creando..."
 		}
 	},
 	"orders": {

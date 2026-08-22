@@ -76,6 +76,8 @@ export class HttpClientAdapter {
 				statusCode: error.status,
 				requestId: error.headers.get('x-request-id') ?? '',
 				path: error.url ?? path,
+				errorCode: this.extractErrorCode(error),
+				errorDetail: this.extractErrorDetail(error),
 				details: error.error,
 			};
 		}
@@ -93,5 +95,15 @@ export class HttpClientAdapter {
 	private extractMessage(error: HttpErrorResponse): string {
 		const body = error.error as { message?: string } | null;
 		return body?.message ?? error.message;
+	}
+
+	private extractErrorCode(error: HttpErrorResponse): string | undefined {
+		const body = error.error as { error_code?: string } | null;
+		return body?.error_code ?? undefined;
+	}
+
+	private extractErrorDetail(error: HttpErrorResponse): unknown {
+		const body = error.error as { detail?: unknown } | null;
+		return body?.detail;
 	}
 }

@@ -86,6 +86,34 @@
 				"number": "Number",
 				"actions": "Actions"
 			}
+		},
+		"createModal": {
+			"title": "Create campaign",
+			"name": {
+				"label": "Name",
+				"error": "Enter a name"
+			},
+			"year": {
+				"label": "Year",
+				"error": "Year must be between {{min}} and {{max}}"
+			},
+			"number": {
+				"label": "Number",
+				"error": "Number must be between {{min}} and {{max}}"
+			},
+			"isActive": {
+				"label": "Mark as the active campaign"
+			},
+			"confirm": {
+				"label": "Are you sure you want to create a campaign with this data?"
+			},
+			"errors": {
+				"activeCampaignAlreadyExists": "An active campaign already exists. You must deactivate it before creating a new active campaign.",
+				"yearNumberAlreadyExists": "A campaign with year {{year}} and number {{number}} already exists."
+			},
+			"cancel": "Cancel",
+			"submit": "Create",
+			"submitting": "Creating..."
 		}
 	},
 	"clients": {
@@ -100,6 +128,31 @@
 				"phone": "Phone",
 				"actions": "Actions"
 			}
+		},
+		"createModal": {
+			"title": "Create client",
+			"givenNames": {
+				"label": "Given names",
+				"error": "Enter the given names"
+			},
+			"familyNames": {
+				"label": "Family names"
+			},
+			"countryPhoneCode": {
+				"label": "Code"
+			},
+			"phoneNumber": {
+				"label": "Phone"
+			},
+			"phone": {
+				"error": "Enter a valid country code and phone number (7 to 12 digits), or leave both fields empty"
+			},
+			"confirm": {
+				"label": "Are you sure you want to create a client with this data?"
+			},
+			"cancel": "Cancel",
+			"submit": "Create",
+			"submitting": "Creating..."
 		}
 	},
 	"orders": {
