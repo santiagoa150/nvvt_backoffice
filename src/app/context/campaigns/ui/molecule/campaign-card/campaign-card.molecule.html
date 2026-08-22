@@ -6,5 +6,10 @@
 		</p>
 		<p class="text-sm text-neutral-600">{{ 'campaigns.list.table.number' | translate }}: {{ campaign().number }}</p>
 	</div>
-	<app-icon-button-atom icon="visibility" color="surface" [attr.title]="'campaigns.list.viewAction' | translate" />
+	<app-icon-button-atom
+		icon="add"
+		color="primary"
+		variant="filled"
+		[attr.title]="'campaigns.list.viewAction' | translate"
+	/>
 </div>

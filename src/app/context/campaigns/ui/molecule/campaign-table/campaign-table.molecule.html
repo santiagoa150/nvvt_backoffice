@@ -8,16 +8,16 @@
 		</colgroup>
 		<thead class="bg-neutral-100">
 			<tr>
-				<th class="px-4 py-3 text-sm font-bold text-neutral-800">
+				<th class="px-4 py-3 text-base font-bold text-neutral-800">
 					{{ 'campaigns.list.table.name' | translate }}
 				</th>
-				<th class="px-4 py-3 text-sm font-bold text-neutral-800">
+				<th class="px-4 py-3 text-base font-bold text-neutral-800">
 					{{ 'campaigns.list.table.year' | translate }}
 				</th>
-				<th class="px-4 py-3 text-sm font-bold text-neutral-800">
+				<th class="px-4 py-3 text-base font-bold text-neutral-800">
 					{{ 'campaigns.list.table.number' | translate }}
 				</th>
-				<th class="px-4 py-3 text-sm font-bold text-neutral-800">
+				<th class="px-4 py-3 text-base font-bold text-neutral-800">
 					{{ 'campaigns.list.table.actions' | translate }}
 				</th>
 			</tr>
@@ -37,13 +37,14 @@
 			</tr>
 			} @else { @for (campaign of campaigns(); track campaign.campaignId) {
 			<tr class="border-t border-neutral-200" [style.height.px]="rowHeightPx">
-				<td class="truncate px-4 py-3 text-sm text-black">{{ campaign.name }}</td>
-				<td class="px-4 py-3 text-sm text-neutral-600">{{ campaign.year }}</td>
-				<td class="px-4 py-3 text-sm text-neutral-600">{{ campaign.number }}</td>
+				<td class="truncate px-4 py-3 text-base text-black">{{ campaign.name }}</td>
+				<td class="px-4 py-3 text-base text-neutral-600">{{ campaign.year }}</td>
+				<td class="px-4 py-3 text-base text-neutral-600">{{ campaign.number }}</td>
 				<td class="px-4 py-3">
 					<app-icon-button-atom
-						icon="visibility"
-						color="surface"
+						icon="add"
+						color="primary"
+						variant="filled"
 						[attr.title]="'campaigns.list.viewAction' | translate"
 					/>
 				</td>
