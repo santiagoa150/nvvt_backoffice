@@ -1,15 +1,16 @@
 <app-modal-organism (backdropClick)="dismiss.emit()">
 	<h2 class="text-2xl font-bold text-primary-900">{{ 'clients.createModal.title' | translate }}</h2>
 
-	<form class="mt-4 flex flex-col gap-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+	<form class="mt-4 flex flex-col gap-4" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 		<div class="flex flex-col gap-1.5">
 			<label for="client-given-names" class="text-base font-bold text-neutral-800">
-				{{ 'clients.createModal.givenNames.label' | translate }}
+				{{ 'clients.createModal.givenNames.label' | translate }} <span class="text-primary-600">*</span>
 			</label>
 			<input
 				id="client-given-names"
 				type="text"
 				formControlName="givenNames"
+				autocomplete="off"
 				class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
 			/>
 			@if (form.controls.givenNames.invalid && form.controls.givenNames.touched) {
@@ -25,6 +26,7 @@
 				id="client-family-names"
 				type="text"
 				formControlName="familyNames"
+				autocomplete="off"
 				class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
 			/>
 		</div>
@@ -34,14 +36,7 @@
 				<label for="client-country-code" class="text-base font-bold text-neutral-800">
 					{{ 'clients.createModal.countryPhoneCode.label' | translate }}
 				</label>
-				<input
-					id="client-country-code"
-					type="number"
-					formControlName="countryPhoneCode"
-					[min]="minCountryCode"
-					[max]="maxCountryCode"
-					class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
-				/>
+				<app-country-select-molecule id="client-country-code" formControlName="countryPhoneCode" />
 			</div>
 			<div class="flex flex-1 flex-col gap-1.5">
 				<label for="client-phone-number" class="text-base font-bold text-neutral-800">
@@ -51,6 +46,7 @@
 					id="client-phone-number"
 					type="text"
 					formControlName="phoneNumber"
+					autocomplete="off"
 					class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
 				/>
 			</div>

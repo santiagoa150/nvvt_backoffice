@@ -10,6 +10,11 @@
 			"pageOf": "Page {{page}} of {{totalPages}}",
 			"previous": "Previous page",
 			"next": "Next page"
+		},
+		"countrySelect": {
+			"placeholder": "Code",
+			"searchPlaceholder": "Search country...",
+			"empty": "No countries found"
 		}
 	},
 	"sidebar": {

@@ -1,15 +1,16 @@
 <app-modal-organism (backdropClick)="dismiss.emit()">
 	<h2 class="text-2xl font-bold text-primary-900">{{ 'campaigns.createModal.title' | translate }}</h2>
 
-	<form class="mt-4 flex flex-col gap-4" [formGroup]="form" (ngSubmit)="onSubmit()">
+	<form class="mt-4 flex flex-col gap-4" [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
 		<div class="flex flex-col gap-1.5">
 			<label for="campaign-name" class="text-base font-bold text-neutral-800">
-				{{ 'campaigns.createModal.name.label' | translate }}
+				{{ 'campaigns.createModal.name.label' | translate }} <span class="text-primary-600">*</span>
 			</label>
 			<input
 				id="campaign-name"
 				type="text"
 				formControlName="name"
+				autocomplete="off"
 				class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
 			/>
 			@if (form.controls.name.invalid && form.controls.name.touched) {
@@ -19,7 +20,7 @@
 
 		<div class="flex flex-col gap-1.5">
 			<label for="campaign-year" class="text-base font-bold text-neutral-800">
-				{{ 'campaigns.createModal.year.label' | translate }}
+				{{ 'campaigns.createModal.year.label' | translate }} <span class="text-primary-600">*</span>
 			</label>
 			<input
 				id="campaign-year"
@@ -27,6 +28,7 @@
 				formControlName="year"
 				[min]="minYear"
 				[max]="maxYear"
+				autocomplete="off"
 				class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
 			/>
 			@if (form.controls.year.invalid && form.controls.year.touched) {
@@ -38,7 +40,7 @@
 
 		<div class="flex flex-col gap-1.5">
 			<label for="campaign-number" class="text-base font-bold text-neutral-800">
-				{{ 'campaigns.createModal.number.label' | translate }}
+				{{ 'campaigns.createModal.number.label' | translate }} <span class="text-primary-600">*</span>
 			</label>
 			<input
 				id="campaign-number"
@@ -46,6 +48,7 @@
 				formControlName="number"
 				[min]="minNumber"
 				[max]="maxNumber"
+				autocomplete="off"
 				class="rounded-lg border border-neutral-300 px-4 py-2.5 text-black focus:border-primary-500 focus:ring-2 focus:ring-primary-500/30 focus:outline-none"
 			/>
 			@if (form.controls.number.invalid && form.controls.number.touched) {

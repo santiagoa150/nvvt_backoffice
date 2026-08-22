@@ -3,6 +3,7 @@ import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Va
 import { TranslatePipe } from '@ngx-translate/core';
 import { AppError } from '../../../../../shared/domain/error/exception';
 import { RoundedButtonAtom } from '../../../../../shared/ui/atom/button/rounded-button/rounded-button.atom';
+import { CountrySelectMolecule } from '../../../../../shared/ui/molecule/country-select/country-select.molecule';
 import { ModalOrganism } from '../../../../../shared/ui/organism/modal/modal.organism';
 import { ClientInjectionTokens } from '../../../client.injection-tokens';
 import { ClientRepository } from '../../../domain/repository/client.repository';
@@ -32,7 +33,7 @@ function phonePairValidator(control: AbstractControl): ValidationErrors | null {
 @Component({
 	selector: 'app-create-client-modal-organism',
 	templateUrl: './create-client-modal.organism.html',
-	imports: [ReactiveFormsModule, TranslatePipe, RoundedButtonAtom, ModalOrganism],
+	imports: [ReactiveFormsModule, TranslatePipe, RoundedButtonAtom, ModalOrganism, CountrySelectMolecule],
 })
 export class CreateClientModalOrganism {
 	private readonly formBuilder = inject(FormBuilder);
@@ -40,9 +41,6 @@ export class CreateClientModalOrganism {
 
 	public readonly created = output<void>();
 	public readonly dismiss = output<void>();
-
-	protected readonly minCountryCode = MIN_COUNTRY_CODE;
-	protected readonly maxCountryCode = MAX_COUNTRY_CODE;
 
 	protected readonly form = this.formBuilder.group(
 		{
