@@ -1,0 +1,61 @@
+<div class="overflow-hidden rounded-2xl border border-neutral-300">
+	<table class="w-full table-fixed border-collapse text-left">
+		<colgroup>
+			<col class="w-1/2" />
+			<col class="w-1/4" />
+			<col class="w-1/4" />
+		</colgroup>
+		<thead class="bg-neutral-100">
+			<tr>
+				<th class="px-4 py-3 text-base font-bold text-neutral-800">
+					{{ 'clients.list.table.name' | translate }}
+				</th>
+				<th class="px-4 py-3 text-base font-bold text-neutral-800">
+					{{ 'clients.list.table.phone' | translate }}
+				</th>
+				<th class="px-4 py-3 text-base font-bold text-neutral-800">
+					{{ 'clients.list.table.actions' | translate }}
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (isLoading()) {
+			<tr [style.height.px]="bodyHeightPx()">
+				<td colspan="3" class="text-center align-middle">
+					<app-loading-spinner-atom />
+				</td>
+			</tr>
+			} @else if (isEmpty()) {
+			<tr [style.height.px]="bodyHeightPx()">
+				<td colspan="3" class="text-center align-middle">
+					<app-empty-clients-molecule />
+				</td>
+			</tr>
+			} @else { @for (client of clients(); track client.clientId) {
+			<tr class="border-t border-neutral-200" [style.height.px]="rowHeightPx">
+				<td class="truncate px-4 py-3 text-base text-black">{{ client.fullName }}</td>
+				<td class="px-4 py-3 text-base text-neutral-600">{{ client.phone ?? '-' }}</td>
+				<td class="px-4 py-3">
+					<app-icon-button-atom
+						icon="add"
+						color="primary"
+						variant="filled"
+						[attr.title]="'clients.list.viewAction' | translate"
+					/>
+				</td>
+			</tr>
+			} @for (empty of emptyRows(); track $index) {
+			<tr [class.border-t]="$first" [class.border-neutral-200]="$first" [style.height.px]="rowHeightPx">
+				<td colspan="3"></td>
+			</tr>
+			} }
+		</tbody>
+		<tfoot>
+			<tr class="border-t border-neutral-200 bg-neutral-100">
+				<td colspan="3" class="px-4 py-1">
+					<ng-content select="[footer]" />
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

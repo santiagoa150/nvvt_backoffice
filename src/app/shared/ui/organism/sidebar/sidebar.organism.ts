@@ -41,6 +41,7 @@ export class SidebarOrganism {
 	});
 	protected readonly modules: SidebarModule[] = [
 		{ icon: 'campaign', labelKey: 'sidebar.modules.campaigns', route: '/campaign' },
+		{ icon: 'group', labelKey: 'sidebar.modules.clients', route: '/client' },
 	];
 
 	/**

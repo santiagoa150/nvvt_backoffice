@@ -14,7 +14,8 @@
 	},
 	"sidebar": {
 		"modules": {
-			"campaigns": "Campaigns"
+			"campaigns": "Campaigns",
+			"clients": "Clients"
 		}
 	},
 	"login": {
@@ -88,6 +89,18 @@
 		}
 	},
 	"clients": {
+		"list": {
+			"title": "Clients",
+			"description": "Manage your business's clients.",
+			"create": "Create client",
+			"empty": "No clients",
+			"viewAction": "View details",
+			"table": {
+				"name": "Name",
+				"phone": "Phone",
+				"actions": "Actions"
+			}
+		}
 	},
 	"orders": {
 	}
