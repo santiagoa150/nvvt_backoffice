@@ -6,6 +6,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { LanguagesConstants } from './shared/domain/languages.constants';
+import { authTokenInterceptor } from './shared/infra/interceptor/auth-token.interceptor';
 import { sessionInterceptor } from './shared/infra/interceptor/session.interceptor';
 import { SharedProviders } from './shared/shared.providers';
 
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
 		provideBrowserGlobalErrorListeners(),
 		provideZoneChangeDetection({ eventCoalescing: true }),
 		provideRouter(routes),
-		provideHttpClient(withInterceptors([sessionInterceptor])),
+		provideHttpClient(withInterceptors([authTokenInterceptor, sessionInterceptor])),
 		provideTranslateService({
 			fallbackLang: LanguagesConstants.ES,
 			lang: LanguagesConstants.ES,

@@ -1,0 +1,25 @@
+<div class="flex items-center justify-center gap-4">
+	<button
+		type="button"
+		[disabled]="!canGoPrevious()"
+		(click)="goToPrevious()"
+		[attr.aria-label]="'shared.pagination.previous' | translate"
+		class="inline-flex cursor-pointer items-center justify-center rounded-full p-2 text-primary-800 transition hover:bg-black/5 disabled:cursor-not-allowed disabled:text-neutral-300 disabled:hover:bg-transparent"
+	>
+		<span class="material-icons">chevron_left</span>
+	</button>
+
+	<span class="text-base text-neutral-600">
+		{{ 'shared.pagination.pageOf' | translate: { page: page(), totalPages: totalPages() } }}
+	</span>
+
+	<button
+		type="button"
+		[disabled]="!canGoNext()"
+		(click)="goToNext()"
+		[attr.aria-label]="'shared.pagination.next' | translate"
+		class="inline-flex cursor-pointer items-center justify-center rounded-full p-2 text-primary-800 transition hover:bg-black/5 disabled:cursor-not-allowed disabled:text-neutral-300 disabled:hover:bg-transparent"
+	>
+		<span class="material-icons">chevron_right</span>
+	</button>
+</div>

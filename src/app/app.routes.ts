@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { campaignRoutes } from './context/campaigns/campaign.routes';
 import { authGuard } from './shared/infra/guard/auth.guard';
+import { MainLayout } from './shared/ui/layout/main-layout/main-layout';
 import { LandingPage } from './shared/ui/page/landing/landing.page';
 import { LoginPage } from './shared/ui/page/login/login.page';
 
@@ -10,5 +11,9 @@ import { LoginPage } from './shared/ui/page/login/login.page';
 export const routes: Routes = [
 	{ path: '', component: LandingPage, pathMatch: 'full' },
 	{ path: 'login', component: LoginPage },
-	{ path: 'campaign', children: campaignRoutes, canActivate: [authGuard] },
+	{
+		path: '',
+		component: MainLayout,
+		children: [{ path: 'campaign', children: campaignRoutes, canActivate: [authGuard] }],
+	},
 ];

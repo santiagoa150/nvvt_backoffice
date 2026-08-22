@@ -4,7 +4,18 @@
 			"en": "Inglés",
 			"es": "Español"
 		},
-		"login": "Iniciar sesión"
+		"login": "Iniciar sesión",
+		"logout": "Cerrar sesión",
+		"pagination": {
+			"pageOf": "Página {{page}} de {{totalPages}}",
+			"previous": "Página anterior",
+			"next": "Página siguiente"
+		}
+	},
+	"sidebar": {
+		"modules": {
+			"campaigns": "Campañas"
+		}
 	},
 	"login": {
 		"title": "Iniciar sesión",
@@ -60,6 +71,21 @@
 		}
 	},
 	"campaigns": {
+		"list": {
+			"title": "Campañas",
+			"description": "Gestiona las campañas activas de tu negocio.",
+			"help": "Aquí puedes ver y administrar todas tus campañas.",
+			"create": "Crear campaña",
+			"loading": "Cargando campañas...",
+			"empty": "Aún no tienes campañas.",
+			"viewAction": "Ver detalle",
+			"table": {
+				"name": "Nombre",
+				"year": "Año",
+				"number": "Número",
+				"actions": "Acciones"
+			}
+		}
 	},
 	"clients": {
 	},
