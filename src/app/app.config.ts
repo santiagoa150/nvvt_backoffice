@@ -26,5 +26,6 @@ export const appConfig: ApplicationConfig = {
 		}),
 		SharedProviders.TOKEN_REPOSITORY,
 		SharedProviders.AUTH_REPOSITORY,
+		SharedProviders.SESSION_STORAGE_REPOSITORY,
 	],
 };

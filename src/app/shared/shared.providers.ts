@@ -3,6 +3,7 @@ import { Provider } from '@angular/core';
 import { AuthApiAdapter } from './infra/adapter/http/auth-api.adapter';
 import { NgxTranslateAdapter } from './infra/adapter/i18n/ngx-translate.adapter';
 import { LocalStorageTokenAdapter } from './infra/adapter/storage/local-storage-token.adapter';
+import { SessionStorageAdapter } from './infra/adapter/storage/session-storage.adapter';
 import { SharedInjectionTokens } from './shared.injection-tokens';
 
 /**
@@ -21,5 +22,9 @@ export const SharedProviders: Record<SharedProvidersConstants, Provider> = {
 	[SharedProvidersConstants.AUTH_REPOSITORY]: {
 		provide: SharedInjectionTokens.AUTH_REPOSITORY,
 		useClass: AuthApiAdapter,
+	},
+	[SharedProvidersConstants.SESSION_STORAGE_REPOSITORY]: {
+		provide: SharedInjectionTokens.SESSION_STORAGE_REPOSITORY,
+		useClass: SessionStorageAdapter,
 	},
 };
