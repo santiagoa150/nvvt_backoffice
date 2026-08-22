@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconButtonAtom } from '../../../../../shared/ui/atom/button/icon-button/icon-button.atom';
 import { Client } from '../../../domain/client';
@@ -15,4 +15,6 @@ import { Client } from '../../../domain/client';
 })
 export class ClientCardMolecule {
 	public readonly client = input.required<Client>();
+
+	public readonly deleteClient = output<Client>();
 }

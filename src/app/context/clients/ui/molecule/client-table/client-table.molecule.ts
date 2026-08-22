@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconButtonAtom } from '../../../../../shared/ui/atom/button/icon-button/icon-button.atom';
 import { LoadingSpinnerAtom } from '../../../../../shared/ui/atom/loading-spinner/loading-spinner.atom';
@@ -24,6 +24,8 @@ export class ClientTableMolecule {
 	public readonly clients = input.required<Client[]>();
 	public readonly pageSize = input<number>(10);
 	public readonly isLoading = input<boolean>(false);
+
+	public readonly deleteClient = output<Client>();
 
 	protected readonly isEmpty = computed(() => !this.isLoading() && this.clients().length === 0);
 	protected readonly emptyRows = computed(() =>

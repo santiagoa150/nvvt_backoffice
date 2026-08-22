@@ -85,12 +85,28 @@
 			"loading": "Loading campaigns...",
 			"empty": "No campaigns",
 			"viewAction": "View details",
+			"deleteAction": "Delete campaign",
 			"table": {
 				"name": "Name",
 				"year": "Year",
 				"number": "Number",
+				"status": "Status",
 				"actions": "Actions"
+			},
+			"deleteConfirm": {
+				"title": "Delete campaign",
+				"message": "Are you sure you want to delete the campaign \"{{name}}\"? This action cannot be undone.",
+				"confirm": "Delete",
+				"cancel": "Cancel",
+				"errors": {
+					"cannotBeDeleted": "Only scheduled campaigns can be deleted."
+				}
 			}
+		},
+		"status": {
+			"ACTIVE": "Active",
+			"SCHEDULED": "Scheduled",
+			"ARCHIVED": "Archived"
 		},
 		"createModal": {
 			"title": "Create campaign",
@@ -128,10 +144,17 @@
 			"create": "Create client",
 			"empty": "No clients",
 			"viewAction": "View details",
+			"deleteAction": "Delete client",
 			"table": {
 				"name": "Name",
 				"phone": "Phone",
 				"actions": "Actions"
+			},
+			"deleteConfirm": {
+				"title": "Delete client",
+				"message": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone.",
+				"confirm": "Delete",
+				"cancel": "Cancel"
 			}
 		},
 		"createModal": {

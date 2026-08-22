@@ -12,7 +12,12 @@
 
 	<div class="flex min-h-0 flex-1 flex-col py-6">
 		<div class="hidden sm:block">
-			<app-campaign-table-molecule [campaigns]="campaigns()" [pageSize]="pageSize" [isLoading]="isLoading()">
+			<app-campaign-table-molecule
+				[campaigns]="campaigns()"
+				[pageSize]="pageSize"
+				[isLoading]="isLoading()"
+				(deleteCampaign)="onDeleteRequested($event)"
+			>
 				<app-paginator-organism
 					footer
 					[page]="page()"
@@ -31,7 +36,7 @@
 				<app-empty-campaigns-molecule />
 			</div>
 			} @else { @for (campaign of campaigns(); track campaign.campaignId) {
-			<app-campaign-card-molecule [campaign]="campaign" />
+			<app-campaign-card-molecule [campaign]="campaign" (deleteCampaign)="onDeleteRequested($event)" />
 			} }
 			<app-paginator-organism
 				class="mt-3 mb-4 block"
@@ -45,4 +50,22 @@
 
 @if (isCreateModalOpen()) {
 <app-create-campaign-modal-organism (created)="onCampaignCreated()" (dismiss)="isCreateModalOpen.set(false)" />
+} @if (pendingDelete(); as campaign) {
+<app-confirm-dialog-organism
+	[title]="'campaigns.list.deleteConfirm.title' | translate"
+	[message]="'campaigns.list.deleteConfirm.message' | translate: { name: campaign.name }"
+	[confirmLabel]="'campaigns.list.deleteConfirm.confirm' | translate"
+	[cancelLabel]="'campaigns.list.deleteConfirm.cancel' | translate"
+	[isConfirming]="isDeleting()"
+	(confirmed)="onDeleteConfirmed()"
+	(dismiss)="onDeleteDismissed()"
+>
+	@if (deleteError()) {
+	<p error class="mt-4 text-base text-primary-600">
+		@switch (deleteError()?.errorCode) { @case ('CAMPAIGN_CANNOT_BE_DELETED') { {{
+		'campaigns.list.deleteConfirm.errors.cannotBeDeleted' | translate }} } @default { {{ deleteError()?.message }} }
+		}
+	</p>
+	}
+</app-confirm-dialog-organism>
 }

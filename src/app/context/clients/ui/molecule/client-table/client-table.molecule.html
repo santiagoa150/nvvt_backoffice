@@ -36,12 +36,21 @@
 				<td class="truncate px-4 py-3 text-base text-black">{{ client.fullName }}</td>
 				<td class="px-4 py-3 text-base text-neutral-600">{{ client.phone ?? '-' }}</td>
 				<td class="px-4 py-3">
-					<app-icon-button-atom
-						icon="add"
-						color="primary"
-						variant="filled"
-						[attr.title]="'clients.list.viewAction' | translate"
-					/>
+					<div class="flex items-center gap-2">
+						<app-icon-button-atom
+							icon="add"
+							color="primary"
+							variant="filled"
+							[attr.title]="'clients.list.viewAction' | translate"
+						/>
+						<app-icon-button-atom
+							icon="delete"
+							color="primary"
+							variant="filled"
+							[attr.title]="'clients.list.deleteAction' | translate"
+							(click)="deleteClient.emit(client)"
+						/>
+					</div>
 				</td>
 			</tr>
 			} @for (empty of emptyRows(); track $index) {

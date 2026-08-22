@@ -1,10 +1,11 @@
 <div class="overflow-hidden rounded-2xl border border-neutral-300">
 	<table class="w-full table-fixed border-collapse text-left">
 		<colgroup>
-			<col class="w-2/5" />
-			<col class="w-1/5" />
-			<col class="w-1/5" />
-			<col class="w-1/5" />
+			<col class="w-1/3" />
+			<col class="w-1/6" />
+			<col class="w-1/6" />
+			<col class="w-1/6" />
+			<col class="w-1/6" />
 		</colgroup>
 		<thead class="bg-neutral-100">
 			<tr>
@@ -18,6 +19,9 @@
 					{{ 'campaigns.list.table.number' | translate }}
 				</th>
 				<th class="px-4 py-3 text-base font-bold text-neutral-800">
+					{{ 'campaigns.list.table.status' | translate }}
+				</th>
+				<th class="px-4 py-3 text-base font-bold text-neutral-800">
 					{{ 'campaigns.list.table.actions' | translate }}
 				</th>
 			</tr>
@@ -25,13 +29,13 @@
 		<tbody>
 			@if (isLoading()) {
 			<tr [style.height.px]="bodyHeightPx()">
-				<td colspan="4" class="text-center align-middle">
+				<td colspan="5" class="text-center align-middle">
 					<app-loading-spinner-atom />
 				</td>
 			</tr>
 			} @else if (isEmpty()) {
 			<tr [style.height.px]="bodyHeightPx()">
-				<td colspan="4" class="text-center align-middle">
+				<td colspan="5" class="text-center align-middle">
 					<app-empty-campaigns-molecule />
 				</td>
 			</tr>
@@ -40,24 +44,38 @@
 				<td class="truncate px-4 py-3 text-base text-black">{{ campaign.name }}</td>
 				<td class="px-4 py-3 text-base text-neutral-600">{{ campaign.year }}</td>
 				<td class="px-4 py-3 text-base text-neutral-600">{{ campaign.number }}</td>
+				<td class="px-4 py-3 text-base text-neutral-600">
+					{{ 'campaigns.status.' + campaign.status | translate }}
+				</td>
 				<td class="px-4 py-3">
-					<app-icon-button-atom
-						icon="add"
-						color="primary"
-						variant="filled"
-						[attr.title]="'campaigns.list.viewAction' | translate"
-					/>
+					<div class="flex items-center gap-2">
+						<app-icon-button-atom
+							icon="add"
+							color="primary"
+							variant="filled"
+							[attr.title]="'campaigns.list.viewAction' | translate"
+						/>
+						@if (campaign.status === 'SCHEDULED') {
+						<app-icon-button-atom
+							icon="delete"
+							color="primary"
+							variant="filled"
+							[attr.title]="'campaigns.list.deleteAction' | translate"
+							(click)="deleteCampaign.emit(campaign)"
+						/>
+						}
+					</div>
 				</td>
 			</tr>
 			} @for (empty of emptyRows(); track $index) {
 			<tr [class.border-t]="$first" [class.border-neutral-200]="$first" [style.height.px]="rowHeightPx">
-				<td colspan="4"></td>
+				<td colspan="5"></td>
 			</tr>
 			} }
 		</tbody>
 		<tfoot>
 			<tr class="border-t border-neutral-200 bg-neutral-100">
-				<td colspan="4" class="px-4 py-1">
+				<td colspan="5" class="px-4 py-1">
 					<ng-content select="[footer]" />
 				</td>
 			</tr>

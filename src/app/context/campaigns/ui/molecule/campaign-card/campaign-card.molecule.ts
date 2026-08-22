@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconButtonAtom } from '../../../../../shared/ui/atom/button/icon-button/icon-button.atom';
 import { Campaign } from '../../../domain/campaign';
@@ -15,4 +15,6 @@ import { Campaign } from '../../../domain/campaign';
 })
 export class CampaignCardMolecule {
 	public readonly campaign = input.required<Campaign>();
+
+	public readonly deleteCampaign = output<Campaign>();
 }

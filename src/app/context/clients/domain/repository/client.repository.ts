@@ -18,4 +18,10 @@ export interface ClientRepository {
 	 * @param client - The client details to create.
 	 */
 	create(client: CreateClient): Observable<void>;
+
+	/**
+	 * Deletes a client by its ID.
+	 * @param clientId - The ID of the client to delete.
+	 */
+	delete(clientId: string): Observable<void>;
 }

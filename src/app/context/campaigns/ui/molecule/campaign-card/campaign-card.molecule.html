@@ -6,10 +6,21 @@
 		</p>
 		<p class="text-sm text-neutral-600">{{ 'campaigns.list.table.number' | translate }}: {{ campaign().number }}</p>
 	</div>
-	<app-icon-button-atom
-		icon="add"
-		color="primary"
-		variant="filled"
-		[attr.title]="'campaigns.list.viewAction' | translate"
-	/>
+	<div class="flex items-center gap-2">
+		<app-icon-button-atom
+			icon="add"
+			color="primary"
+			variant="filled"
+			[attr.title]="'campaigns.list.viewAction' | translate"
+		/>
+		@if (campaign().status === 'SCHEDULED') {
+		<app-icon-button-atom
+			icon="delete"
+			color="primary"
+			variant="filled"
+			[attr.title]="'campaigns.list.deleteAction' | translate"
+			(click)="deleteCampaign.emit(campaign())"
+		/>
+		}
+	</div>
 </div>

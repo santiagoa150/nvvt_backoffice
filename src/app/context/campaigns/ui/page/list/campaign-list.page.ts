@@ -1,8 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AppError } from '../../../../../shared/domain/error/exception';
 import { RoundedButtonAtom } from '../../../../../shared/ui/atom/button/rounded-button/rounded-button.atom';
 import { LoadingSpinnerAtom } from '../../../../../shared/ui/atom/loading-spinner/loading-spinner.atom';
 import { PageHeaderMolecule } from '../../../../../shared/ui/molecule/page-header/page-header.molecule';
+import { ConfirmDialogOrganism } from '../../../../../shared/ui/organism/confirm-dialog/confirm-dialog.organism';
 import { PaginatorOrganism } from '../../../../../shared/ui/organism/paginator/paginator.organism';
 import { CampaignInjectionTokens } from '../../../campaign.injection-tokens';
 import { CampaignProviders } from '../../../campaign.providers';
@@ -33,6 +35,7 @@ const PAGE_SIZE = 10;
 		CampaignCardMolecule,
 		EmptyCampaignsMolecule,
 		CreateCampaignModalOrganism,
+		ConfirmDialogOrganism,
 	],
 	providers: [CampaignProviders.CAMPAIGN_REPOSITORY],
 })
@@ -46,6 +49,10 @@ export class CampaignListPage {
 	protected readonly isLoading = signal(true);
 	protected readonly isEmpty = computed(() => !this.isLoading() && this.campaigns().length === 0);
 	protected readonly isCreateModalOpen = signal(false);
+
+	protected readonly pendingDelete = signal<Campaign | null>(null);
+	protected readonly isDeleting = signal(false);
+	protected readonly deleteError = signal<AppError | null>(null);
 
 	constructor() {
 		this.fetchCampaigns(this.page());
@@ -68,6 +75,49 @@ export class CampaignListPage {
 		this.isCreateModalOpen.set(false);
 		this.page.set(1);
 		this.fetchCampaigns(1);
+	}
+
+	/**
+	 * This method is called when the user requests to delete a campaign from
+	 * the list. It opens the confirmation dialog for that campaign.
+	 */
+	protected onDeleteRequested(campaign: Campaign): void {
+		this.deleteError.set(null);
+		this.pendingDelete.set(campaign);
+	}
+
+	/**
+	 * This method is called when the user dismisses the delete confirmation
+	 * dialog without confirming.
+	 */
+	protected onDeleteDismissed(): void {
+		this.pendingDelete.set(null);
+		this.deleteError.set(null);
+	}
+
+	/**
+	 * This method is called when the user confirms the deletion of the
+	 * pending campaign. It deletes it via the campaigns API and refreshes
+	 * the current page.
+	 */
+	protected onDeleteConfirmed(): void {
+		const campaign = this.pendingDelete();
+		if (!campaign) {
+			return;
+		}
+
+		this.isDeleting.set(true);
+		this.campaignRepository.delete(campaign.campaignId).subscribe({
+			next: () => {
+				this.isDeleting.set(false);
+				this.pendingDelete.set(null);
+				this.fetchCampaigns(this.page());
+			},
+			error: (error: AppError) => {
+				this.isDeleting.set(false);
+				this.deleteError.set(error);
+			},
+		});
 	}
 
 	private fetchCampaigns(page: number): void {

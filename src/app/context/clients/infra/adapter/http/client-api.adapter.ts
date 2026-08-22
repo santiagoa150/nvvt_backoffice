@@ -48,6 +48,10 @@ export class ClientApiAdapter implements ClientRepository {
 		});
 	}
 
+	delete(clientId: string): Observable<void> {
+		return this.http.delete<void>(`/clients/${clientId}`);
+	}
+
 	private toPagination(response: PaginationResponse<ClientResponse>): Pagination<Client> {
 		return {
 			data: response.data.map((client) => this.toClient(client)),

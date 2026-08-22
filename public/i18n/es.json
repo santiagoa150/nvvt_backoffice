@@ -85,12 +85,28 @@
 			"loading": "Cargando campañas...",
 			"empty": "No hay campañas",
 			"viewAction": "Ver detalle",
+			"deleteAction": "Eliminar campaña",
 			"table": {
 				"name": "Nombre",
 				"year": "Año",
 				"number": "Número",
+				"status": "Estado",
 				"actions": "Acciones"
+			},
+			"deleteConfirm": {
+				"title": "Eliminar campaña",
+				"message": "¿Estás seguro que quieres eliminar la campaña \"{{name}}\"? Esta acción no se puede deshacer.",
+				"confirm": "Eliminar",
+				"cancel": "Cancelar",
+				"errors": {
+					"cannotBeDeleted": "Solo se pueden eliminar campañas programadas."
+				}
 			}
+		},
+		"status": {
+			"ACTIVE": "Activa",
+			"SCHEDULED": "Programada",
+			"ARCHIVED": "Archivada"
 		},
 		"createModal": {
 			"title": "Crear campaña",
@@ -128,10 +144,17 @@
 			"create": "Crear cliente",
 			"empty": "No hay clientes",
 			"viewAction": "Ver detalle",
+			"deleteAction": "Eliminar cliente",
 			"table": {
 				"name": "Nombre",
 				"phone": "Teléfono",
 				"actions": "Acciones"
+			},
+			"deleteConfirm": {
+				"title": "Eliminar cliente",
+				"message": "¿Estás seguro que quieres eliminar a \"{{name}}\"? Esta acción no se puede deshacer.",
+				"confirm": "Eliminar",
+				"cancel": "Cancelar"
 			}
 		},
 		"createModal": {

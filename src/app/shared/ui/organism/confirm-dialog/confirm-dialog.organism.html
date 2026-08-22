@@ -1,0 +1,15 @@
+<app-modal-organism (backdropClick)="dismiss.emit()">
+	<h2 class="text-2xl font-bold text-primary-900">{{ title() }}</h2>
+	<p class="mt-4 text-base text-neutral-800">{{ message() }}</p>
+
+	<ng-content select="[error]" />
+
+	<div class="mt-6 flex justify-end gap-3">
+		<app-rounded-button-atom type="button" color="surface" (click)="dismiss.emit()">
+			{{ cancelLabel() }}
+		</app-rounded-button-atom>
+		<app-rounded-button-atom type="button" color="primary" [disabled]="isConfirming()" (click)="confirmed.emit()">
+			{{ confirmLabel() }}
+		</app-rounded-button-atom>
+	</div>
+</app-modal-organism>

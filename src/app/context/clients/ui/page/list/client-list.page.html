@@ -12,7 +12,12 @@
 
 	<div class="flex min-h-0 flex-1 flex-col py-6">
 		<div class="hidden sm:block">
-			<app-client-table-molecule [clients]="clients()" [pageSize]="pageSize" [isLoading]="isLoading()">
+			<app-client-table-molecule
+				[clients]="clients()"
+				[pageSize]="pageSize"
+				[isLoading]="isLoading()"
+				(deleteClient)="onDeleteRequested($event)"
+			>
 				<app-paginator-organism
 					footer
 					[page]="page()"
@@ -31,7 +36,7 @@
 				<app-empty-clients-molecule />
 			</div>
 			} @else { @for (client of clients(); track client.clientId) {
-			<app-client-card-molecule [client]="client" />
+			<app-client-card-molecule [client]="client" (deleteClient)="onDeleteRequested($event)" />
 			} }
 			<app-paginator-organism
 				class="mt-3 mb-4 block"
@@ -45,4 +50,18 @@
 
 @if (isCreateModalOpen()) {
 <app-create-client-modal-organism (created)="onClientCreated()" (dismiss)="isCreateModalOpen.set(false)" />
+} @if (pendingDelete(); as client) {
+<app-confirm-dialog-organism
+	[title]="'clients.list.deleteConfirm.title' | translate"
+	[message]="'clients.list.deleteConfirm.message' | translate: { name: client.fullName }"
+	[confirmLabel]="'clients.list.deleteConfirm.confirm' | translate"
+	[cancelLabel]="'clients.list.deleteConfirm.cancel' | translate"
+	[isConfirming]="isDeleting()"
+	(confirmed)="onDeleteConfirmed()"
+	(dismiss)="onDeleteDismissed()"
+>
+	@if (deleteError()) {
+	<p error class="mt-4 text-base text-primary-600">{{ deleteError()?.message }}</p>
+	}
+</app-confirm-dialog-organism>
 }
