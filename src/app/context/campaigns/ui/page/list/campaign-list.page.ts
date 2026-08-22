@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RoundedButtonAtom } from '../../../../../shared/ui/atom/button/rounded-button/rounded-button.atom';
+import { LoadingSpinnerAtom } from '../../../../../shared/ui/atom/loading-spinner/loading-spinner.atom';
 import { PageHeaderMolecule } from '../../../../../shared/ui/molecule/page-header/page-header.molecule';
 import { PaginatorOrganism } from '../../../../../shared/ui/organism/paginator/paginator.organism';
 import { CampaignInjectionTokens } from '../../../campaign.injection-tokens';
@@ -19,9 +20,11 @@ const PAGE_SIZE = 10;
 @Component({
 	selector: 'app-campaign-list-page',
 	templateUrl: './campaign-list.page.html',
+	host: { class: 'flex flex-1 flex-col min-h-0' },
 	imports: [
 		TranslatePipe,
 		RoundedButtonAtom,
+		LoadingSpinnerAtom,
 		PageHeaderMolecule,
 		PaginatorOrganism,
 		CampaignTableMolecule,
@@ -32,6 +35,7 @@ const PAGE_SIZE = 10;
 export class CampaignListPage {
 	private readonly campaignRepository = inject<CampaignRepository>(CampaignInjectionTokens.CAMPAIGN_REPOSITORY);
 
+	protected readonly pageSize = PAGE_SIZE;
 	protected readonly campaigns = signal<Campaign[]>([]);
 	protected readonly page = signal(1);
 	protected readonly totalPages = signal(1);

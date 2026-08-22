@@ -1,30 +1,59 @@
-<table class="w-full border-collapse overflow-hidden rounded-2xl border border-neutral-300 text-left">
-	<thead class="bg-neutral-100">
-		<tr>
-			<th class="px-4 py-3 text-sm font-bold text-neutral-800">{{ 'campaigns.list.table.name' | translate }}</th>
-			<th class="px-4 py-3 text-sm font-bold text-neutral-800">{{ 'campaigns.list.table.year' | translate }}</th>
-			<th class="px-4 py-3 text-sm font-bold text-neutral-800">
-				{{ 'campaigns.list.table.number' | translate }}
-			</th>
-			<th class="px-4 py-3 text-sm font-bold text-neutral-800">
-				{{ 'campaigns.list.table.actions' | translate }}
-			</th>
-		</tr>
-	</thead>
-	<tbody>
-		@for (campaign of campaigns(); track campaign.campaignId) {
-		<tr class="border-t border-neutral-200">
-			<td class="px-4 py-3 text-base text-black">{{ campaign.name }}</td>
-			<td class="px-4 py-3 text-base text-neutral-600">{{ campaign.year }}</td>
-			<td class="px-4 py-3 text-base text-neutral-600">{{ campaign.number }}</td>
-			<td class="px-4 py-3">
-				<app-icon-button-atom
-					icon="visibility"
-					color="surface"
-					[attr.title]="'campaigns.list.viewAction' | translate"
-				/>
-			</td>
-		</tr>
-		}
-	</tbody>
-</table>
+<div class="overflow-hidden rounded-2xl border border-neutral-300">
+	<table class="w-full table-fixed border-collapse text-left">
+		<colgroup>
+			<col class="w-2/5" />
+			<col class="w-1/5" />
+			<col class="w-1/5" />
+			<col class="w-1/5" />
+		</colgroup>
+		<thead class="bg-neutral-100">
+			<tr>
+				<th class="px-4 py-3 text-sm font-bold text-neutral-800">
+					{{ 'campaigns.list.table.name' | translate }}
+				</th>
+				<th class="px-4 py-3 text-sm font-bold text-neutral-800">
+					{{ 'campaigns.list.table.year' | translate }}
+				</th>
+				<th class="px-4 py-3 text-sm font-bold text-neutral-800">
+					{{ 'campaigns.list.table.number' | translate }}
+				</th>
+				<th class="px-4 py-3 text-sm font-bold text-neutral-800">
+					{{ 'campaigns.list.table.actions' | translate }}
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@if (isLoading()) {
+			<tr [style.height.px]="bodyHeightPx()">
+				<td colspan="4" class="text-center align-middle">
+					<app-loading-spinner-atom />
+				</td>
+			</tr>
+			} @else { @for (campaign of campaigns(); track campaign.campaignId) {
+			<tr class="border-t border-neutral-200" [style.height.px]="rowHeightPx">
+				<td class="truncate px-4 py-3 text-sm text-black">{{ campaign.name }}</td>
+				<td class="px-4 py-3 text-sm text-neutral-600">{{ campaign.year }}</td>
+				<td class="px-4 py-3 text-sm text-neutral-600">{{ campaign.number }}</td>
+				<td class="px-4 py-3">
+					<app-icon-button-atom
+						icon="visibility"
+						color="surface"
+						[attr.title]="'campaigns.list.viewAction' | translate"
+					/>
+				</td>
+			</tr>
+			} @for (empty of emptyRows(); track $index) {
+			<tr [class.border-t]="$first" [class.border-neutral-200]="$first" [style.height.px]="rowHeightPx">
+				<td colspan="4"></td>
+			</tr>
+			} }
+		</tbody>
+		<tfoot>
+			<tr class="border-t border-neutral-200 bg-neutral-100">
+				<td colspan="4" class="px-4 py-1">
+					<ng-content select="[footer]" />
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
