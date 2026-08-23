@@ -1,3 +1,153 @@
-<div class="p-6">
-	<h1 class="text-3xl font-bold text-black">Campaigns Detail</h1>
+<div class="flex min-h-0 flex-1 flex-col bg-white p-6">
+	<div class="border-b border-neutral-200 pb-6 shadow-[0_4px_6px_-6px_rgba(0,0,0,0.3)]">
+		<button
+			type="button"
+			class="mb-3 inline-flex cursor-pointer items-center gap-1 text-sm font-semibold text-primary-600 hover:underline"
+			(click)="onBack()"
+		>
+			<span class="material-icons text-lg">arrow_back</span>
+			{{ 'campaigns.detail.back' | translate }}
+		</button>
+
+		@if (campaign(); as campaignValue) {
+		<app-page-header-molecule [title]="campaignValue.name">
+			<div class="flex items-center gap-2">
+				@if (campaignValue.status === 'SCHEDULED') {
+				<app-icon-button-atom
+					icon="check_circle"
+					color="primary"
+					variant="filled"
+					[attr.title]="'campaigns.list.activateAction' | translate"
+					(click)="onActivateRequested()"
+				/>
+				<app-icon-button-atom
+					icon="delete"
+					color="primary"
+					variant="filled"
+					[attr.title]="'campaigns.list.deleteAction' | translate"
+					(click)="onDeleteRequested()"
+				/>
+				}
+			</div>
+		</app-page-header-molecule>
+		<div class="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-sm text-neutral-600">
+			<p>{{ 'campaigns.list.table.year' | translate }}: {{ campaignValue.year }}</p>
+			<p>{{ 'campaigns.list.table.number' | translate }}: {{ campaignValue.number }}</p>
+			<p>
+				{{ 'campaigns.list.table.status' | translate }}: {{ 'campaigns.status.' + campaignValue.status |
+				translate }}
+			</p>
+		</div>
+		@if (activateError()) {
+		<p class="mt-2 text-sm text-primary-600">
+			@switch (activateError()?.errorCode) { @case ('ACTIVE_CAMPAIGN_ALREADY_EXISTS') { {{
+			'campaigns.list.activateErrors.activeCampaignAlreadyExists' | translate }} } @case
+			('CAMPAIGN_ALREADY_ACTIVE') { {{ 'campaigns.list.activateErrors.campaignAlreadyActive' | translate }} }
+			@default { {{ activateError()?.message }} } }
+		</p>
+		} } @else if (isLoadingCampaign()) {
+		<div class="flex items-center justify-center py-4">
+			<app-loading-spinner-atom />
+		</div>
+		} @else {
+		<p class="text-sm text-neutral-500">{{ 'campaigns.detail.notFound' | translate }}</p>
+		}
+	</div>
+
+	<div class="flex min-h-0 flex-1 flex-col py-6">
+		<h2 class="text-xl font-bold text-black">{{ 'campaigns.detail.products.title' | translate }}</h2>
+		<p class="mt-1 mb-4 text-sm text-neutral-600">{{ 'campaigns.detail.products.description' | translate }}</p>
+		@if (isLoadingCampaign()) {
+		<div class="flex flex-1 items-center justify-center">
+			<app-loading-spinner-atom />
+		</div>
+		} @else {
+		<div class="grid min-h-0 flex-1 grid-cols-1 gap-6 lg:grid-cols-3">
+			<div class="order-last flex min-h-0 flex-col lg:order-0 lg:col-span-2">
+				@if (isEmpty()) {
+				<div class="flex flex-1 items-center justify-center">
+					<app-empty-products-molecule />
+				</div>
+				} @else {
+				<div class="flex flex-col gap-6">
+					<div>
+						<h3 class="mb-3 text-base font-bold text-black">
+							{{ 'campaigns.detail.products.installments.title' | translate }}
+						</h3>
+						@if (isInstallmentEmpty()) {
+						<p class="text-sm text-neutral-500">
+							{{ 'campaigns.detail.products.installments.empty' | translate }}
+						</p>
+						} @else {
+						<div class="flex flex-col gap-3">
+							@for (product of installmentProducts(); track product.productId) {
+							<app-product-card-molecule [product]="product" />
+							}
+						</div>
+						}
+					</div>
+					<div>
+						<h3 class="mb-3 text-base font-bold text-black">
+							{{ 'campaigns.detail.products.singlePayment.title' | translate }}
+						</h3>
+						@if (isSinglePaymentEmpty()) {
+						<p class="text-sm text-neutral-500">
+							{{ 'campaigns.detail.products.singlePayment.empty' | translate }}
+						</p>
+						} @else {
+						<div class="flex flex-col gap-3">
+							@for (product of singlePaymentProducts(); track product.productId) {
+							<app-product-card-molecule [product]="product" />
+							}
+						</div>
+						}
+					</div>
+				</div>
+				}
+			</div>
+
+			@if (summary(); as summaryValue) {
+			<div class="order-first h-fit rounded-2xl bg-primary-100 p-4 lg:order-0 lg:col-span-1">
+				<h3 class="mb-3 text-base font-bold text-primary-900">
+					{{ 'campaigns.detail.summary.title' | translate }}
+				</h3>
+				<div class="flex flex-col gap-2 text-sm text-primary-900">
+					<div class="flex items-center justify-between gap-2">
+						<span>{{ 'campaigns.detail.summary.totalCatalogPrice' | translate }}</span>
+						<app-price-atom [value]="summaryValue.totalCatalogPrice" class="font-semibold" />
+					</div>
+					<div class="flex items-center justify-between gap-2">
+						<span>{{ 'campaigns.detail.summary.totalListPrice' | translate }}</span>
+						<app-price-atom [value]="summaryValue.totalListPrice" class="font-semibold" />
+					</div>
+					<div class="flex items-center justify-between gap-2 border-t border-primary-200 pt-2">
+						<span>{{ 'campaigns.detail.summary.profit' | translate }}</span>
+						<app-price-atom [value]="summaryValue.profit" class="font-bold" />
+					</div>
+				</div>
+			</div>
+			}
+		</div>
+		}
+	</div>
 </div>
+
+@if (pendingDelete(); as campaignValue) {
+<app-confirm-dialog-organism
+	[title]="'campaigns.list.deleteConfirm.title' | translate"
+	[message]="'campaigns.list.deleteConfirm.message' | translate: { name: campaignValue.name }"
+	[confirmLabel]="'campaigns.list.deleteConfirm.confirm' | translate"
+	[cancelLabel]="'campaigns.list.deleteConfirm.cancel' | translate"
+	[isConfirming]="isDeleting()"
+	(confirmed)="onDeleteConfirmed()"
+	(dismiss)="onDeleteDismissed()"
+>
+	@if (deleteError()) {
+	<p error class="mt-4 text-base text-primary-600">
+		@switch (deleteError()?.errorCode) { @case ('CAMPAIGN_CANNOT_BE_DELETED') { {{
+		'campaigns.list.deleteConfirm.errors.cannotBeDeleted' | translate }} } @default { {{ deleteError()?.message }} }
+		}
+	</p>
+	}
+</app-confirm-dialog-organism>
+}

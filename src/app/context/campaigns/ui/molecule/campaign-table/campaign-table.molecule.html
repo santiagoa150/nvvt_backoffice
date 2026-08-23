@@ -54,6 +54,7 @@
 							color="primary"
 							variant="filled"
 							[attr.title]="'campaigns.list.viewAction' | translate"
+							[routerLink]="['/campaign/detail', campaign.campaignId]"
 						/>
 						@if (campaign.status === 'SCHEDULED') {
 						<app-icon-button-atom

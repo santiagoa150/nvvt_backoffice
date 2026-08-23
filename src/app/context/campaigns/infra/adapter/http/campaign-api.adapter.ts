@@ -1,8 +1,16 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { environment } from '../../../../../../environments/environment';
 import { HttpClientAdapter } from '../../../../../shared/infra/adapter/http/http-client.adapter';
 import { Pagination } from '../../../../../shared/domain/pagination';
-import { Campaign, CampaignStatus, CreateCampaign } from '../../../domain/campaign';
+import { Product, ProductStatus } from '../../../../products/domain/product';
+import {
+	Campaign,
+	CampaignStatus,
+	CampaignSummary,
+	CampaignWithProducts,
+	CreateCampaign,
+} from '../../../domain/campaign';
 import { CampaignRepository } from '../../../domain/repository/campaign.repository';
 
 interface CampaignResponse {
@@ -11,6 +19,32 @@ interface CampaignResponse {
 	readonly year: number;
 	readonly number: number;
 	readonly status: CampaignStatus;
+}
+
+interface ProductResponse {
+	readonly product_id: string;
+	readonly campaign_id: string;
+	readonly code: string;
+	readonly name: string;
+	readonly image_url: string;
+	readonly catalog_price: number;
+	readonly list_price: number;
+	readonly installment_amounts: number[];
+	readonly quantity: number;
+	readonly installments: number;
+	readonly page: number;
+	readonly status: ProductStatus;
+}
+
+interface CampaignSummaryResponse {
+	readonly total_catalog_price: number;
+	readonly total_list_price: number;
+	readonly profit: number;
+}
+
+interface CampaignWithProductsResponse extends CampaignResponse {
+	readonly products: ProductResponse[];
+	readonly summary: CampaignSummaryResponse;
 }
 
 interface PaginationResponse<T> {
@@ -33,6 +67,12 @@ export class CampaignApiAdapter implements CampaignRepository {
 		return this.http
 			.get<PaginationResponse<CampaignResponse>>('/campaigns/', { params: { page, limit } })
 			.pipe(map((response) => this.toPagination(response)));
+	}
+
+	getById(campaignId: string): Observable<CampaignWithProducts> {
+		return this.http
+			.get<CampaignWithProductsResponse>(`/campaigns/${campaignId}`)
+			.pipe(map((response) => this.toCampaignWithProducts(response)));
 	}
 
 	create(campaign: CreateCampaign): Observable<void> {
@@ -71,5 +111,42 @@ export class CampaignApiAdapter implements CampaignRepository {
 			number: response.number,
 			status: response.status,
 		};
+	}
+
+	private toCampaignWithProducts(response: CampaignWithProductsResponse): CampaignWithProducts {
+		return {
+			...this.toCampaign(response),
+			products: response.products.map((product) => this.toProduct(product)),
+			summary: this.toCampaignSummary(response.summary),
+		};
+	}
+
+	private toCampaignSummary(response: CampaignSummaryResponse): CampaignSummary {
+		return {
+			totalCatalogPrice: response.total_catalog_price,
+			totalListPrice: response.total_list_price,
+			profit: response.profit,
+		};
+	}
+
+	private toProduct(response: ProductResponse): Product {
+		return {
+			productId: response.product_id,
+			campaignId: response.campaign_id,
+			code: response.code,
+			name: response.name,
+			imageUrl: this.toAbsoluteAssetUrl(response.image_url),
+			catalogPrice: response.catalog_price,
+			listPrice: response.list_price,
+			installmentAmounts: response.installment_amounts,
+			quantity: response.quantity,
+			installments: response.installments,
+			page: response.page,
+			status: response.status,
+		};
+	}
+
+	private toAbsoluteAssetUrl(path: string): string {
+		return path.startsWith('/') ? `${environment.ASSET_BASE_URL}${path}` : path;
 	}
 }

@@ -1,4 +1,5 @@
-import { Component, computed, input, output } from '@angular/core';
+import { Component, computed, inject, input, output } from '@angular/core';
+import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { CardAction, CardActionsMolecule } from '../../../../../shared/ui/molecule/card-actions/card-actions.molecule';
 import { Campaign } from '../../../domain/campaign';
@@ -14,6 +15,8 @@ import { Campaign } from '../../../domain/campaign';
 	imports: [TranslatePipe, CardActionsMolecule],
 })
 export class CampaignCardMolecule {
+	private readonly router = inject(Router);
+
 	public readonly campaign = input.required<Campaign>();
 
 	public readonly deleteCampaign = output<Campaign>();
@@ -22,7 +25,11 @@ export class CampaignCardMolecule {
 	protected readonly cardActions = computed<CardAction[]>(() => {
 		const campaign = this.campaign();
 		const actions: CardAction[] = [
-			{ icon: 'add', labelKey: 'campaigns.list.viewAction', onClick: () => undefined },
+			{
+				icon: 'add',
+				labelKey: 'campaigns.list.viewAction',
+				onClick: () => this.router.navigate(['/campaign/detail', campaign.campaignId]),
+			},
 		];
 
 		if (campaign.status === 'SCHEDULED') {

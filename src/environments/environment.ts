@@ -7,4 +7,5 @@ import { Environment } from './environment.type';
 export const environment: Environment = {
 	NODE_ENV: 'development',
 	API_URL: 'http://localhost:8000/api/v1',
+	ASSET_BASE_URL: 'http://localhost:8000',
 };

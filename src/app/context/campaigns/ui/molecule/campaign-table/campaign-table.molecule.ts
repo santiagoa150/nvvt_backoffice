@@ -1,4 +1,5 @@
 import { Component, computed, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { IconButtonAtom } from '../../../../../shared/ui/atom/button/icon-button/icon-button.atom';
 import { LoadingSpinnerAtom } from '../../../../../shared/ui/atom/loading-spinner/loading-spinner.atom';
@@ -18,7 +19,7 @@ const ROW_HEIGHT_PX = 65;
 @Component({
 	selector: 'app-campaign-table-molecule',
 	templateUrl: './campaign-table.molecule.html',
-	imports: [TranslatePipe, IconButtonAtom, LoadingSpinnerAtom, EmptyCampaignsMolecule],
+	imports: [TranslatePipe, RouterLink, IconButtonAtom, LoadingSpinnerAtom, EmptyCampaignsMolecule],
 })
 export class CampaignTableMolecule {
 	public readonly campaigns = input.required<Campaign[]>();

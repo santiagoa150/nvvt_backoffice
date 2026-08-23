@@ -110,6 +110,29 @@
 				"campaignAlreadyActive": "This campaign is already active."
 			}
 		},
+		"detail": {
+			"back": "Back to campaigns",
+			"notFound": "Campaign not found.",
+			"products": {
+				"title": "Products",
+				"description": "Here you'll see every product that was added to this campaign, split by how it's paid for.",
+				"empty": "This campaign doesn't have any products yet.",
+				"singlePayment": {
+					"title": "Single payment",
+					"empty": "No single payment products."
+				},
+				"installments": {
+					"title": "Installment payment",
+					"empty": "No installment payment products."
+				}
+			},
+			"summary": {
+				"title": "Campaign summary",
+				"totalCatalogPrice": "Total catalog price",
+				"totalListPrice": "Total list price",
+				"profit": "Profit"
+			}
+		},
 		"status": {
 			"ACTIVE": "Active",
 			"SCHEDULED": "Scheduled",
@@ -191,5 +214,20 @@
 		}
 	},
 	"orders": {
+	},
+	"products": {
+		"status": {
+			"ACTIVE": "Active",
+			"OUT_OF_STOCK": "Out of stock"
+		},
+		"card": {
+			"code": "Code",
+			"quantity": "Quantity",
+			"installments": "Installments",
+			"page": "Page",
+			"listPrice": "List price",
+			"catalogPrice": "Catalog price",
+			"installment": "Installment {{number}}"
+		}
 	}
 }

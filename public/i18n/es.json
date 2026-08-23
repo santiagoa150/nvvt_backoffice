@@ -110,6 +110,29 @@
 				"campaignAlreadyActive": "Esta campaña ya está activa."
 			}
 		},
+		"detail": {
+			"back": "Volver a campañas",
+			"notFound": "No se encontró la campaña.",
+			"products": {
+				"title": "Productos",
+				"description": "Aquí verás todos los productos que se agregaron a esta campaña, separados según su forma de pago.",
+				"empty": "Aún no hay productos en esta campaña.",
+				"singlePayment": {
+					"title": "Pago único",
+					"empty": "No hay productos de pago único."
+				},
+				"installments": {
+					"title": "Pago por cuotas",
+					"empty": "No hay productos de pago por cuotas."
+				}
+			},
+			"summary": {
+				"title": "Resumen de la campaña",
+				"totalCatalogPrice": "Total precio catálogo",
+				"totalListPrice": "Total precio lista",
+				"profit": "Ganancias"
+			}
+		},
 		"status": {
 			"ACTIVE": "Activa",
 			"SCHEDULED": "Programada",
@@ -191,5 +214,20 @@
 		}
 	},
 	"orders": {
+	},
+	"products": {
+		"status": {
+			"ACTIVE": "Activo",
+			"OUT_OF_STOCK": "Agotado"
+		},
+		"card": {
+			"code": "Código",
+			"quantity": "Cantidad",
+			"installments": "Cuotas",
+			"page": "Página",
+			"listPrice": "Precio lista",
+			"catalogPrice": "Precio catálogo",
+			"installment": "Cuota {{number}}"
+		}
 	}
 }
