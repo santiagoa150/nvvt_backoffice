@@ -13,4 +13,8 @@ export class ProductApiAdapter implements ProductRepository {
 	delete(productId: string): Observable<void> {
 		return this.http.delete<void>(`/products/${productId}`);
 	}
+
+	updateQuantity(productId: string, quantity: number): Observable<void> {
+		return this.http.patch<void>(`/products/${productId}/quantity`, { quantity });
+	}
 }

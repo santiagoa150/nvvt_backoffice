@@ -225,10 +225,13 @@
 			"quantity": "Quantity",
 			"installments": "Installments",
 			"page": "Page",
-			"listPrice": "List price",
-			"catalogPrice": "Catalog price",
+			"listPrice": "Unit list price",
+			"catalogPrice": "Unit catalog price",
 			"installment": "Installment {{number}}",
-			"deleteAction": "Delete product"
+			"deleteAction": "Delete product",
+			"confirmQuantity": "Save quantity",
+			"decreaseQuantity": "Decrease quantity",
+			"increaseQuantity": "Increase quantity"
 		},
 		"deleteConfirm": {
 			"title": "Delete product",

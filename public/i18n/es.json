@@ -225,10 +225,13 @@
 			"quantity": "Cantidad",
 			"installments": "Cuotas",
 			"page": "Página",
-			"listPrice": "Precio lista",
-			"catalogPrice": "Precio catálogo",
+			"listPrice": "Precio lista unitario",
+			"catalogPrice": "Precio catálogo unitario",
 			"installment": "Cuota {{number}}",
-			"deleteAction": "Eliminar producto"
+			"deleteAction": "Eliminar producto",
+			"confirmQuantity": "Guardar cantidad",
+			"decreaseQuantity": "Disminuir cantidad",
+			"increaseQuantity": "Aumentar cantidad"
 		},
 		"deleteConfirm": {
 			"title": "Eliminar producto",

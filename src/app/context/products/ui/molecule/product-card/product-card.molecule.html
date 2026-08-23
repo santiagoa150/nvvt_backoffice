@@ -17,10 +17,15 @@
 			</div>
 			<p class="text-base text-neutral-500">{{ 'products.card.code' | translate }}: {{ product().code }}</p>
 			<p class="text-sm text-neutral-400">
-				{{ 'products.card.quantity' | translate }}: {{ product().quantity }} · {{ 'products.card.installments' |
-				translate }}: {{ product().installments }} · {{ 'products.card.page' | translate }}: {{ product().page
-				}}
+				@if (hasMultipleInstallments()) { {{ 'products.card.installments' | translate }}: {{
+				product().installments }} · } {{ 'products.card.page' | translate }}: {{ product().page }}
 			</p>
+
+			@if (!quantityEditable()) {
+			<p class="mt-1 text-sm text-neutral-400">
+				{{ 'products.card.quantity' | translate }}: {{ product().quantity }}
+			</p>
+			}
 		</div>
 	</div>
 
@@ -44,14 +49,47 @@
 		}
 	</div>
 
-	@if (deletable()) {
-	<app-icon-button-atom
-		icon="delete"
-		color="primary"
-		variant="filled"
-		[attr.title]="'products.card.deleteAction' | translate"
-		(click)="deleteProduct.emit(product())"
-		class="self-start sm:self-center"
-	/>
-	}
+	<div class="flex flex-col items-center gap-1 sm:items-end sm:self-center">
+		<div class="flex items-center gap-2">
+			@if (quantityEditable()) {
+			<app-icon-button-atom
+				icon="remove"
+				color="primary"
+				variant="filled"
+				[attr.title]="'products.card.decreaseQuantity' | translate"
+				[class.opacity-50]="isAtMinQuantity()"
+				[class.pointer-events-none]="isAtMinQuantity()"
+				(click)="onDecrement()"
+			/>
+			<span class="min-w-6 text-center text-base font-semibold text-black">{{ pendingQuantity() }}</span>
+			<app-icon-button-atom
+				icon="add"
+				color="primary"
+				variant="filled"
+				[attr.title]="'products.card.increaseQuantity' | translate"
+				(click)="onIncrement()"
+			/>
+			<app-icon-button-atom
+				icon="check"
+				color="primary"
+				variant="filled"
+				[attr.title]="'products.card.confirmQuantity' | translate"
+				[class.invisible]="!hasPendingQuantityChange()"
+				[class.pointer-events-none]="!hasPendingQuantityChange()"
+				(click)="onConfirmQuantity()"
+			/>
+			} @if (deletable()) {
+			<app-icon-button-atom
+				icon="delete"
+				color="primary"
+				variant="filled"
+				[attr.title]="'products.card.deleteAction' | translate"
+				(click)="deleteProduct.emit(product())"
+			/>
+			}
+		</div>
+		@if (updateQuantityError()) {
+		<p class="text-xs text-primary-600">{{ updateQuantityError()?.message }}</p>
+		}
+	</div>
 </div>

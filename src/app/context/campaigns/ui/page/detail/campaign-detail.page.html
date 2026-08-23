@@ -84,7 +84,9 @@
 							<app-product-card-molecule
 								[product]="product"
 								[deletable]="canDeleteProducts()"
+								[quantityEditable]="canDeleteProducts()"
 								(deleteProduct)="onDeleteProductRequested($event)"
+								(quantityUpdated)="onProductQuantityUpdated()"
 							/>
 							}
 						</div>
@@ -104,7 +106,9 @@
 							<app-product-card-molecule
 								[product]="product"
 								[deletable]="canDeleteProducts()"
+								[quantityEditable]="canDeleteProducts()"
 								(deleteProduct)="onDeleteProductRequested($event)"
+								(quantityUpdated)="onProductQuantityUpdated()"
 							/>
 							}
 						</div>

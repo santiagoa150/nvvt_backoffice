@@ -194,6 +194,15 @@ export class CampaignDetailPage {
 		});
 	}
 
+	/**
+	 * This method is called when a product's quantity is successfully updated.
+	 * It refreshes the campaign so its products and pricing summary (which
+	 * depends on each product's quantity) reflect the change.
+	 */
+	protected onProductQuantityUpdated(): void {
+		this.fetchCampaign();
+	}
+
 	private fetchCampaign(): void {
 		this.isLoadingCampaign.set(true);
 		this.campaignRepository.getById(this.campaignId).subscribe({
