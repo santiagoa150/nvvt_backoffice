@@ -1,6 +1,10 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { Product } from '../../../../products/domain/product';
+import { ProductRepository } from '../../../../products/domain/repository/product.repository';
+import { ProductInjectionTokens } from '../../../../products/product.injection-tokens';
+import { ProductProviders } from '../../../../products/product.providers';
 import { EmptyProductsMolecule } from '../../../../products/ui/molecule/empty-products/empty-products.molecule';
 import { ProductCardMolecule } from '../../../../products/ui/molecule/product-card/product-card.molecule';
 import { AppError } from '../../../../../shared/domain/error/exception';
@@ -33,12 +37,13 @@ import { CampaignRepository } from '../../../domain/repository/campaign.reposito
 		ConfirmDialogOrganism,
 		PriceAtom,
 	],
-	providers: [CampaignProviders.CAMPAIGN_REPOSITORY],
+	providers: [CampaignProviders.CAMPAIGN_REPOSITORY, ProductProviders.PRODUCT_REPOSITORY],
 })
 export class CampaignDetailPage {
 	private readonly route = inject(ActivatedRoute);
 	private readonly router = inject(Router);
 	private readonly campaignRepository = inject<CampaignRepository>(CampaignInjectionTokens.CAMPAIGN_REPOSITORY);
+	private readonly productRepository = inject<ProductRepository>(ProductInjectionTokens.PRODUCT_REPOSITORY);
 
 	private readonly campaignId = this.route.snapshot.paramMap.get('id') ?? '';
 
@@ -48,6 +53,7 @@ export class CampaignDetailPage {
 	protected readonly summary = computed(() => this.campaign()?.summary ?? null);
 	protected readonly products = computed(() => this.campaign()?.products ?? []);
 	protected readonly isEmpty = computed(() => !this.isLoadingCampaign() && this.products().length === 0);
+	protected readonly canDeleteProducts = computed(() => this.campaign()?.status === 'ACTIVE');
 
 	protected readonly singlePaymentProducts = computed(() =>
 		this.products().filter((product) => product.installments <= 1),
@@ -68,6 +74,10 @@ export class CampaignDetailPage {
 
 	protected readonly isActivating = signal(false);
 	protected readonly activateError = signal<AppError | null>(null);
+
+	protected readonly pendingDeleteProduct = signal<Product | null>(null);
+	protected readonly isDeletingProduct = signal(false);
+	protected readonly deleteProductError = signal<AppError | null>(null);
 
 	constructor() {
 		this.fetchCampaign();
@@ -137,6 +147,49 @@ export class CampaignDetailPage {
 			error: (error: AppError) => {
 				this.isActivating.set(false);
 				this.activateError.set(error);
+			},
+		});
+	}
+
+	/**
+	 * This method is called when the user requests to delete a product from
+	 * this campaign. It opens the confirmation dialog for that product.
+	 */
+	protected onDeleteProductRequested(product: Product): void {
+		this.deleteProductError.set(null);
+		this.pendingDeleteProduct.set(product);
+	}
+
+	/**
+	 * This method is called when the user dismisses the product delete
+	 * confirmation dialog without confirming.
+	 */
+	protected onDeleteProductDismissed(): void {
+		this.pendingDeleteProduct.set(null);
+		this.deleteProductError.set(null);
+	}
+
+	/**
+	 * This method is called when the user confirms the deletion of the
+	 * pending product. It deletes it via the products API and refreshes the
+	 * campaign's products and pricing summary.
+	 */
+	protected onDeleteProductConfirmed(): void {
+		const product = this.pendingDeleteProduct();
+		if (!product) {
+			return;
+		}
+
+		this.isDeletingProduct.set(true);
+		this.productRepository.delete(product.productId).subscribe({
+			next: () => {
+				this.isDeletingProduct.set(false);
+				this.pendingDeleteProduct.set(null);
+				this.fetchCampaign();
+			},
+			error: (error: AppError) => {
+				this.isDeletingProduct.set(false);
+				this.deleteProductError.set(error);
 			},
 		});
 	}

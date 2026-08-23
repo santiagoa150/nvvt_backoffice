@@ -43,4 +43,15 @@
 		</div>
 		}
 	</div>
+
+	@if (deletable()) {
+	<app-icon-button-atom
+		icon="delete"
+		color="primary"
+		variant="filled"
+		[attr.title]="'products.card.deleteAction' | translate"
+		(click)="deleteProduct.emit(product())"
+		class="self-start sm:self-center"
+	/>
+	}
 </div>

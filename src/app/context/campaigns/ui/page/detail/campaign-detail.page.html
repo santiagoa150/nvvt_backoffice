@@ -81,7 +81,11 @@
 						} @else {
 						<div class="flex flex-col gap-3">
 							@for (product of installmentProducts(); track product.productId) {
-							<app-product-card-molecule [product]="product" />
+							<app-product-card-molecule
+								[product]="product"
+								[deletable]="canDeleteProducts()"
+								(deleteProduct)="onDeleteProductRequested($event)"
+							/>
 							}
 						</div>
 						}
@@ -97,7 +101,11 @@
 						} @else {
 						<div class="flex flex-col gap-3">
 							@for (product of singlePaymentProducts(); track product.productId) {
-							<app-product-card-molecule [product]="product" />
+							<app-product-card-molecule
+								[product]="product"
+								[deletable]="canDeleteProducts()"
+								(deleteProduct)="onDeleteProductRequested($event)"
+							/>
 							}
 						</div>
 						}
@@ -148,6 +156,20 @@
 		'campaigns.list.deleteConfirm.errors.cannotBeDeleted' | translate }} } @default { {{ deleteError()?.message }} }
 		}
 	</p>
+	}
+</app-confirm-dialog-organism>
+} @if (pendingDeleteProduct(); as productValue) {
+<app-confirm-dialog-organism
+	[title]="'products.deleteConfirm.title' | translate"
+	[message]="'products.deleteConfirm.message' | translate: { name: productValue.name }"
+	[confirmLabel]="'products.deleteConfirm.confirm' | translate"
+	[cancelLabel]="'products.deleteConfirm.cancel' | translate"
+	[isConfirming]="isDeletingProduct()"
+	(confirmed)="onDeleteProductConfirmed()"
+	(dismiss)="onDeleteProductDismissed()"
+>
+	@if (deleteProductError()) {
+	<p error class="mt-4 text-base text-primary-600">{{ deleteProductError()?.message }}</p>
 	}
 </app-confirm-dialog-organism>
 }

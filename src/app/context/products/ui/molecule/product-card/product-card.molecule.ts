@@ -1,5 +1,6 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { IconButtonAtom } from '../../../../../shared/ui/atom/button/icon-button/icon-button.atom';
 import { PriceAtom } from '../../../../../shared/ui/atom/price/price.atom';
 import { Product } from '../../../domain/product';
 
@@ -11,10 +12,13 @@ import { Product } from '../../../domain/product';
 @Component({
 	selector: 'app-product-card-molecule',
 	templateUrl: './product-card.molecule.html',
-	imports: [TranslatePipe, PriceAtom],
+	imports: [TranslatePipe, PriceAtom, IconButtonAtom],
 })
 export class ProductCardMolecule {
 	public readonly product = input.required<Product>();
+	public readonly deletable = input<boolean>(false);
+
+	public readonly deleteProduct = output<Product>();
 
 	protected readonly isOutOfStock = computed(() => this.product().status === 'OUT_OF_STOCK');
 	protected readonly hasMultipleInstallments = computed(() => this.product().installments > 1);

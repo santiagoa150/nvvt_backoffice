@@ -227,7 +227,14 @@
 			"page": "Página",
 			"listPrice": "Precio lista",
 			"catalogPrice": "Precio catálogo",
-			"installment": "Cuota {{number}}"
+			"installment": "Cuota {{number}}",
+			"deleteAction": "Eliminar producto"
+		},
+		"deleteConfirm": {
+			"title": "Eliminar producto",
+			"message": "¿Estás seguro que quieres eliminar el producto \"{{name}}\"? Esta acción no se puede deshacer.",
+			"confirm": "Eliminar",
+			"cancel": "Cancelar"
 		}
 	}
 }

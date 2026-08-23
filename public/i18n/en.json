@@ -227,7 +227,14 @@
 			"page": "Page",
 			"listPrice": "List price",
 			"catalogPrice": "Catalog price",
-			"installment": "Installment {{number}}"
+			"installment": "Installment {{number}}",
+			"deleteAction": "Delete product"
+		},
+		"deleteConfirm": {
+			"title": "Delete product",
+			"message": "Are you sure you want to delete the product \"{{name}}\"? This action cannot be undone.",
+			"confirm": "Delete",
+			"cancel": "Cancel"
 		}
 	}
 }
