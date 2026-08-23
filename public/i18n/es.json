@@ -20,7 +20,8 @@
 	"sidebar": {
 		"modules": {
 			"campaigns": "Campañas",
-			"clients": "Clientes"
+			"clients": "Clientes",
+			"settings": "Configuración"
 		}
 	},
 	"login": {
@@ -238,6 +239,18 @@
 			"message": "¿Estás seguro que quieres eliminar el producto \"{{name}}\"? Esta acción no se puede deshacer.",
 			"confirm": "Eliminar",
 			"cancel": "Cancelar"
+		}
+	},
+	"settings": {
+		"title": "Configuración",
+		"description": "Gestiona los valores usados para autenticarte contra el proveedor de productos.",
+		"providerToken": {
+			"label": "Token del proveedor",
+			"description": "El token de autenticación usado para autenticarte contra el proveedor de productos."
+		},
+		"cartId": {
+			"label": "ID del carrito",
+			"description": "El ID del carrito usado al agregar productos desde el proveedor."
 		}
 	}
 }

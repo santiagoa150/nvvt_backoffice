@@ -20,7 +20,8 @@
 	"sidebar": {
 		"modules": {
 			"campaigns": "Campaigns",
-			"clients": "Clients"
+			"clients": "Clients",
+			"settings": "Settings"
 		}
 	},
 	"login": {
@@ -238,6 +239,18 @@
 			"message": "Are you sure you want to delete the product \"{{name}}\"? This action cannot be undone.",
 			"confirm": "Delete",
 			"cancel": "Cancel"
+		}
+	},
+	"settings": {
+		"title": "Settings",
+		"description": "Manage the values used to authenticate against the product provider.",
+		"providerToken": {
+			"label": "Provider token",
+			"description": "The bearer token used to authenticate against the product provider."
+		},
+		"cartId": {
+			"label": "Cart ID",
+			"description": "The ID of the cart used when adding products from the provider."
 		}
 	}
 }
