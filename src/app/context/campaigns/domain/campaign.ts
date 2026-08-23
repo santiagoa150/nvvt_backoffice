@@ -1,4 +1,4 @@
-export type CampaignStatus = 'ACTIVE' | 'SCHEDULED' | 'ARCHIVED';
+export type CampaignStatus = 'ACTIVE' | 'SCHEDULED' | 'FINISHED' | 'ARCHIVED';
 
 export interface Campaign {
 	readonly campaignId: string;

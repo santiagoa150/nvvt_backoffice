@@ -113,6 +113,7 @@
 		"status": {
 			"ACTIVE": "Activa",
 			"SCHEDULED": "Programada",
+			"FINISHED": "Finalizada",
 			"ARCHIVED": "Archivada"
 		},
 		"createModal": {
