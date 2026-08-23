@@ -57,6 +57,13 @@
 						/>
 						@if (campaign.status === 'SCHEDULED') {
 						<app-icon-button-atom
+							icon="check_circle"
+							color="primary"
+							variant="filled"
+							[attr.title]="'campaigns.list.activateAction' | translate"
+							(click)="activateCampaign.emit(campaign)"
+						/>
+						<app-icon-button-atom
 							icon="delete"
 							color="primary"
 							variant="filled"

@@ -88,6 +88,7 @@
 			"empty": "No hay campañas",
 			"viewAction": "Ver detalle",
 			"deleteAction": "Eliminar campaña",
+			"activateAction": "Activar campaña",
 			"table": {
 				"name": "Nombre",
 				"year": "Año",
@@ -103,6 +104,10 @@
 				"errors": {
 					"cannotBeDeleted": "Solo se pueden eliminar campañas programadas."
 				}
+			},
+			"activateErrors": {
+				"activeCampaignAlreadyExists": "Ya existe una campaña activa. Debes desactivarla antes de activar esta.",
+				"campaignAlreadyActive": "Esta campaña ya está activa."
 			}
 		},
 		"status": {

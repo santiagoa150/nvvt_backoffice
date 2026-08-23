@@ -48,6 +48,10 @@ export class CampaignApiAdapter implements CampaignRepository {
 		return this.http.delete<void>(`/campaigns/${campaignId}`);
 	}
 
+	activate(campaignId: string): Observable<void> {
+		return this.http.patch<void>(`/campaigns/${campaignId}/activate`, {});
+	}
+
 	private toPagination(response: PaginationResponse<CampaignResponse>): Pagination<Campaign> {
 		return {
 			data: response.data.map((campaign) => this.toCampaign(campaign)),

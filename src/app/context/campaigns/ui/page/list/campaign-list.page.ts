@@ -54,6 +54,8 @@ export class CampaignListPage {
 	protected readonly isDeleting = signal(false);
 	protected readonly deleteError = signal<AppError | null>(null);
 
+	protected readonly activateError = signal<AppError | null>(null);
+
 	constructor() {
 		this.fetchCampaigns(this.page());
 	}
@@ -117,6 +119,19 @@ export class CampaignListPage {
 				this.isDeleting.set(false);
 				this.deleteError.set(error);
 			},
+		});
+	}
+
+	/**
+	 * This method is called when the user requests to activate a campaign
+	 * from the list. It activates it via the campaigns API and refreshes
+	 * the current page.
+	 */
+	protected onActivateRequested(campaign: Campaign): void {
+		this.activateError.set(null);
+		this.campaignRepository.activate(campaign.campaignId).subscribe({
+			next: () => this.fetchCampaigns(this.page()),
+			error: (error: AppError) => this.activateError.set(error),
 		});
 	}
 

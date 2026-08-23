@@ -88,6 +88,7 @@
 			"empty": "No campaigns",
 			"viewAction": "View details",
 			"deleteAction": "Delete campaign",
+			"activateAction": "Activate campaign",
 			"table": {
 				"name": "Name",
 				"year": "Year",
@@ -103,6 +104,10 @@
 				"errors": {
 					"cannotBeDeleted": "Only scheduled campaigns can be deleted."
 				}
+			},
+			"activateErrors": {
+				"activeCampaignAlreadyExists": "An active campaign already exists. You must deactivate it before activating this one.",
+				"campaignAlreadyActive": "This campaign is already active."
 			}
 		},
 		"status": {

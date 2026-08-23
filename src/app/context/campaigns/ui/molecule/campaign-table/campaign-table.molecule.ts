@@ -26,6 +26,7 @@ export class CampaignTableMolecule {
 	public readonly isLoading = input<boolean>(false);
 
 	public readonly deleteCampaign = output<Campaign>();
+	public readonly activateCampaign = output<Campaign>();
 
 	protected readonly isEmpty = computed(() => !this.isLoading() && this.campaigns().length === 0);
 	protected readonly emptyRows = computed(() =>

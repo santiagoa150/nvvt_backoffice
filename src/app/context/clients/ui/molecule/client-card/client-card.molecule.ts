@@ -1,6 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { IconButtonAtom } from '../../../../../shared/ui/atom/button/icon-button/icon-button.atom';
+import { CardAction, CardActionsMolecule } from '../../../../../shared/ui/molecule/card-actions/card-actions.molecule';
 import { Client } from '../../../domain/client';
 
 /**
@@ -11,10 +11,22 @@ import { Client } from '../../../domain/client';
 @Component({
 	selector: 'app-client-card-molecule',
 	templateUrl: './client-card.molecule.html',
-	imports: [TranslatePipe, IconButtonAtom],
+	imports: [TranslatePipe, CardActionsMolecule],
 })
 export class ClientCardMolecule {
 	public readonly client = input.required<Client>();
 
 	public readonly deleteClient = output<Client>();
+
+	protected readonly cardActions = computed<CardAction[]>(() => {
+		const client = this.client();
+		return [
+			{ icon: 'add', labelKey: 'clients.list.viewAction', onClick: () => undefined },
+			{
+				icon: 'delete',
+				labelKey: 'clients.list.deleteAction',
+				onClick: () => this.deleteClient.emit(client),
+			},
+		];
+	});
 }

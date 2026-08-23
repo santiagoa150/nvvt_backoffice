@@ -1,6 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
-import { IconButtonAtom } from '../../../../../shared/ui/atom/button/icon-button/icon-button.atom';
+import { CardAction, CardActionsMolecule } from '../../../../../shared/ui/molecule/card-actions/card-actions.molecule';
 import { Campaign } from '../../../domain/campaign';
 
 /**
@@ -11,10 +11,33 @@ import { Campaign } from '../../../domain/campaign';
 @Component({
 	selector: 'app-campaign-card-molecule',
 	templateUrl: './campaign-card.molecule.html',
-	imports: [TranslatePipe, IconButtonAtom],
+	imports: [TranslatePipe, CardActionsMolecule],
 })
 export class CampaignCardMolecule {
 	public readonly campaign = input.required<Campaign>();
 
 	public readonly deleteCampaign = output<Campaign>();
+	public readonly activateCampaign = output<Campaign>();
+
+	protected readonly cardActions = computed<CardAction[]>(() => {
+		const campaign = this.campaign();
+		const actions: CardAction[] = [
+			{ icon: 'add', labelKey: 'campaigns.list.viewAction', onClick: () => undefined },
+		];
+
+		if (campaign.status === 'SCHEDULED') {
+			actions.push({
+				icon: 'check_circle',
+				labelKey: 'campaigns.list.activateAction',
+				onClick: () => this.activateCampaign.emit(campaign),
+			});
+			actions.push({
+				icon: 'delete',
+				labelKey: 'campaigns.list.deleteAction',
+				onClick: () => this.deleteCampaign.emit(campaign),
+			});
+		}
+
+		return actions;
+	});
 }

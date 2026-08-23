@@ -24,4 +24,10 @@ export interface CampaignRepository {
 	 * @param campaignId - The ID of the campaign to delete.
 	 */
 	delete(campaignId: string): Observable<void>;
+
+	/**
+	 * Activates a campaign by its ID.
+	 * @param campaignId - The ID of the campaign to activate.
+	 */
+	activate(campaignId: string): Observable<void>;
 }

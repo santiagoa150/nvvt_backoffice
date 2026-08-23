@@ -5,19 +5,5 @@
 			{{ 'clients.list.table.phone' | translate }}: {{ client().phone ?? '-' }}
 		</p>
 	</div>
-	<div class="flex items-center gap-2">
-		<app-icon-button-atom
-			icon="add"
-			color="primary"
-			variant="filled"
-			[attr.title]="'clients.list.viewAction' | translate"
-		/>
-		<app-icon-button-atom
-			icon="delete"
-			color="primary"
-			variant="filled"
-			[attr.title]="'clients.list.deleteAction' | translate"
-			(click)="deleteClient.emit(client())"
-		/>
-	</div>
+	<app-card-actions-molecule [actions]="cardActions()" />
 </div>
