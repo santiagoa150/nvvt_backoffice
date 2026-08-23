@@ -21,7 +21,6 @@ export class ClientCardMolecule {
 	protected readonly cardActions = computed<CardAction[]>(() => {
 		const client = this.client();
 		return [
-			{ icon: 'add', labelKey: 'clients.list.viewAction', onClick: () => undefined },
 			{
 				icon: 'delete',
 				labelKey: 'clients.list.deleteAction',

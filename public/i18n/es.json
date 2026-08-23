@@ -150,7 +150,6 @@
 			"description": "Gestiona los clientes de tu negocio.",
 			"create": "Crear cliente",
 			"empty": "No hay clientes",
-			"viewAction": "Ver detalle",
 			"deleteAction": "Eliminar cliente",
 			"table": {
 				"name": "Nombre",

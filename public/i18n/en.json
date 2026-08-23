@@ -150,7 +150,6 @@
 			"description": "Manage your business's clients.",
 			"create": "Create client",
 			"empty": "No clients",
-			"viewAction": "View details",
 			"deleteAction": "Delete client",
 			"table": {
 				"name": "Name",
