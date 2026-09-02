@@ -56,7 +56,15 @@
 							[attr.title]="'campaigns.list.viewAction' | translate"
 							[routerLink]="['/campaign/detail', campaign.campaignId]"
 						/>
-						@if (campaign.status === 'SCHEDULED') {
+						@if (campaign.status === 'ACTIVE') {
+						<app-icon-button-atom
+							icon="flag"
+							color="primary"
+							variant="filled"
+							[attr.title]="'campaigns.list.finishAction' | translate"
+							(click)="finishCampaign.emit(campaign)"
+						/>
+						} @if (campaign.status === 'SCHEDULED') {
 						<app-icon-button-atom
 							icon="check_circle"
 							color="primary"

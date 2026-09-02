@@ -11,14 +11,6 @@
 	</div>
 
 	<div class="flex min-h-0 flex-1 flex-col py-6">
-		@if (activateError()) {
-		<p class="mb-4 text-base text-primary-600">
-			@switch (activateError()?.errorCode) { @case ('ACTIVE_CAMPAIGN_ALREADY_EXISTS') { {{
-			'campaigns.list.activateErrors.activeCampaignAlreadyExists' | translate }} } @case
-			('CAMPAIGN_ALREADY_ACTIVE') { {{ 'campaigns.list.activateErrors.campaignAlreadyActive' | translate }} }
-			@default { {{ activateError()?.message }} } }
-		</p>
-		}
 		<div class="hidden sm:block">
 			<app-campaign-table-molecule
 				[campaigns]="campaigns()"
@@ -26,6 +18,7 @@
 				[isLoading]="isLoading()"
 				(deleteCampaign)="onDeleteRequested($event)"
 				(activateCampaign)="onActivateRequested($event)"
+				(finishCampaign)="onFinishRequested($event)"
 			>
 				<app-paginator-organism
 					footer
@@ -49,6 +42,7 @@
 				[campaign]="campaign"
 				(deleteCampaign)="onDeleteRequested($event)"
 				(activateCampaign)="onActivateRequested($event)"
+				(finishCampaign)="onFinishRequested($event)"
 			/>
 			} }
 			<app-paginator-organism
@@ -78,6 +72,42 @@
 		@switch (deleteError()?.errorCode) { @case ('CAMPAIGN_CANNOT_BE_DELETED') { {{
 		'campaigns.list.deleteConfirm.errors.cannotBeDeleted' | translate }} } @default { {{ deleteError()?.message }} }
 		}
+	</p>
+	}
+</app-confirm-dialog-organism>
+} @if (pendingActivate(); as campaign) {
+<app-confirm-dialog-organism
+	[title]="'campaigns.list.activateConfirm.title' | translate"
+	[message]="'campaigns.list.activateConfirm.message' | translate: { name: campaign.name }"
+	[confirmLabel]="'campaigns.list.activateConfirm.confirm' | translate"
+	[cancelLabel]="'campaigns.list.activateConfirm.cancel' | translate"
+	[isConfirming]="isActivating()"
+	(confirmed)="onActivateConfirmed()"
+	(dismiss)="onActivateDismissed()"
+>
+	@if (activateError()) {
+	<p error class="mt-4 text-base text-primary-600">
+		@switch (activateError()?.errorCode) { @case ('ACTIVE_CAMPAIGN_ALREADY_EXISTS') { {{
+		'campaigns.list.activateErrors.activeCampaignAlreadyExists' | translate }} } @case ('CAMPAIGN_ALREADY_ACTIVE') {
+		{{ 'campaigns.list.activateErrors.campaignAlreadyActive' | translate }} } @default { {{ activateError()?.message
+		}} } }
+	</p>
+	}
+</app-confirm-dialog-organism>
+} @if (pendingFinish(); as campaign) {
+<app-confirm-dialog-organism
+	[title]="'campaigns.list.finishConfirm.title' | translate"
+	[message]="'campaigns.list.finishConfirm.message' | translate: { name: campaign.name }"
+	[confirmLabel]="'campaigns.list.finishConfirm.confirm' | translate"
+	[cancelLabel]="'campaigns.list.finishConfirm.cancel' | translate"
+	[isConfirming]="isFinishing()"
+	(confirmed)="onFinishConfirmed()"
+	(dismiss)="onFinishDismissed()"
+>
+	@if (finishError()) {
+	<p error class="mt-4 text-base text-primary-600">
+		@switch (finishError()?.errorCode) { @case ('CAMPAIGN_CANNOT_BE_FINISHED') { {{
+		'campaigns.list.finishErrors.cannotBeFinished' | translate }} } @default { {{ finishError()?.message }} } }
 	</p>
 	}
 </app-confirm-dialog-organism>

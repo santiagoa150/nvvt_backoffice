@@ -21,6 +21,7 @@ export class CampaignCardMolecule {
 
 	public readonly deleteCampaign = output<Campaign>();
 	public readonly activateCampaign = output<Campaign>();
+	public readonly finishCampaign = output<Campaign>();
 
 	protected readonly cardActions = computed<CardAction[]>(() => {
 		const campaign = this.campaign();
@@ -31,6 +32,14 @@ export class CampaignCardMolecule {
 				onClick: () => this.router.navigate(['/campaign/detail', campaign.campaignId]),
 			},
 		];
+
+		if (campaign.status === 'ACTIVE') {
+			actions.push({
+				icon: 'flag',
+				labelKey: 'campaigns.list.finishAction',
+				onClick: () => this.finishCampaign.emit(campaign),
+			});
+		}
 
 		if (campaign.status === 'SCHEDULED') {
 			actions.push({

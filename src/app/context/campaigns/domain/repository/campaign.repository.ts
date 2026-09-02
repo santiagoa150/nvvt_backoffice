@@ -37,4 +37,10 @@ export interface CampaignRepository {
 	 * @param campaignId - The ID of the campaign to activate.
 	 */
 	activate(campaignId: string): Observable<void>;
+
+	/**
+	 * Finishes a campaign by its ID. Only active campaigns can be finished.
+	 * @param campaignId - The ID of the campaign to finish.
+	 */
+	finish(campaignId: string): Observable<void>;
 }

@@ -91,6 +91,7 @@
 			"viewAction": "Ver detalle",
 			"deleteAction": "Eliminar campaña",
 			"activateAction": "Activar campaña",
+			"finishAction": "Finalizar campaña",
 			"table": {
 				"name": "Nombre",
 				"year": "Año",
@@ -107,9 +108,24 @@
 					"cannotBeDeleted": "Solo se pueden eliminar campañas programadas."
 				}
 			},
+			"activateConfirm": {
+				"title": "Activar campaña",
+				"message": "¿Estás seguro que quieres activar la campaña \"{{name}}\"?",
+				"confirm": "Activar",
+				"cancel": "Cancelar"
+			},
+			"finishConfirm": {
+				"title": "Finalizar campaña",
+				"message": "¿Estás seguro que quieres finalizar la campaña \"{{name}}\"? Esta acción no se puede deshacer.",
+				"confirm": "Finalizar",
+				"cancel": "Cancelar"
+			},
 			"activateErrors": {
 				"activeCampaignAlreadyExists": "Ya existe una campaña activa. Debes desactivarla antes de activar esta.",
 				"campaignAlreadyActive": "Esta campaña ya está activa."
+			},
+			"finishErrors": {
+				"cannotBeFinished": "Solo se pueden finalizar campañas activas."
 			}
 		},
 		"detail": {
@@ -261,9 +277,11 @@
 			"title": "Notificaciones",
 			"description": "Aquí verás todas las notificaciones que has recibido.",
 			"empty": "No hay notificaciones",
+			"goToCampaign": "Ir a la campaña",
 			"table": {
 				"action": "Acción",
-				"status": "Estado"
+				"status": "Estado",
+				"actions": "Acciones"
 			},
 			"status": {
 				"seen": "Vista",

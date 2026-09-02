@@ -13,6 +13,7 @@ interface NotificationResponse {
 	readonly action: string;
 	readonly recipient: string;
 	readonly seen: boolean;
+	readonly reference: string | null;
 }
 
 interface PaginationResponse<T> {
@@ -124,6 +125,7 @@ export class NotificationSseAdapter implements NotificationRepository {
 			action: response.action,
 			recipient: response.recipient,
 			seen: response.seen,
+			reference: response.reference,
 		};
 	}
 }

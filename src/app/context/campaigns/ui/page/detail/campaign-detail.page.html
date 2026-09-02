@@ -12,7 +12,15 @@
 		@if (campaign(); as campaignValue) {
 		<app-page-header-molecule [title]="campaignValue.name">
 			<div class="flex items-center gap-2">
-				@if (campaignValue.status === 'SCHEDULED') {
+				@if (campaignValue.status === 'ACTIVE') {
+				<app-icon-button-atom
+					icon="flag"
+					color="primary"
+					variant="filled"
+					[attr.title]="'campaigns.list.finishAction' | translate"
+					(click)="onFinishRequested()"
+				/>
+				} @if (campaignValue.status === 'SCHEDULED') {
 				<app-icon-button-atom
 					icon="check_circle"
 					color="primary"
@@ -38,14 +46,7 @@
 				translate }}
 			</p>
 		</div>
-		@if (activateError()) {
-		<p class="mt-2 text-sm text-primary-600">
-			@switch (activateError()?.errorCode) { @case ('ACTIVE_CAMPAIGN_ALREADY_EXISTS') { {{
-			'campaigns.list.activateErrors.activeCampaignAlreadyExists' | translate }} } @case
-			('CAMPAIGN_ALREADY_ACTIVE') { {{ 'campaigns.list.activateErrors.campaignAlreadyActive' | translate }} }
-			@default { {{ activateError()?.message }} } }
-		</p>
-		} } @else if (isLoadingCampaign()) {
+		} @else if (isLoadingCampaign()) {
 		<div class="flex items-center justify-center py-4">
 			<app-loading-spinner-atom />
 		</div>
@@ -159,6 +160,42 @@
 		@switch (deleteError()?.errorCode) { @case ('CAMPAIGN_CANNOT_BE_DELETED') { {{
 		'campaigns.list.deleteConfirm.errors.cannotBeDeleted' | translate }} } @default { {{ deleteError()?.message }} }
 		}
+	</p>
+	}
+</app-confirm-dialog-organism>
+} @if (pendingActivate()) {
+<app-confirm-dialog-organism
+	[title]="'campaigns.list.activateConfirm.title' | translate"
+	[message]="'campaigns.list.activateConfirm.message' | translate: { name: campaign()?.name }"
+	[confirmLabel]="'campaigns.list.activateConfirm.confirm' | translate"
+	[cancelLabel]="'campaigns.list.activateConfirm.cancel' | translate"
+	[isConfirming]="isActivating()"
+	(confirmed)="onActivateConfirmed()"
+	(dismiss)="onActivateDismissed()"
+>
+	@if (activateError()) {
+	<p error class="mt-4 text-base text-primary-600">
+		@switch (activateError()?.errorCode) { @case ('ACTIVE_CAMPAIGN_ALREADY_EXISTS') { {{
+		'campaigns.list.activateErrors.activeCampaignAlreadyExists' | translate }} } @case ('CAMPAIGN_ALREADY_ACTIVE') {
+		{{ 'campaigns.list.activateErrors.campaignAlreadyActive' | translate }} } @default { {{ activateError()?.message
+		}} } }
+	</p>
+	}
+</app-confirm-dialog-organism>
+} @if (pendingFinish()) {
+<app-confirm-dialog-organism
+	[title]="'campaigns.list.finishConfirm.title' | translate"
+	[message]="'campaigns.list.finishConfirm.message' | translate: { name: campaign()?.name }"
+	[confirmLabel]="'campaigns.list.finishConfirm.confirm' | translate"
+	[cancelLabel]="'campaigns.list.finishConfirm.cancel' | translate"
+	[isConfirming]="isFinishing()"
+	(confirmed)="onFinishConfirmed()"
+	(dismiss)="onFinishDismissed()"
+>
+	@if (finishError()) {
+	<p error class="mt-4 text-base text-primary-600">
+		@switch (finishError()?.errorCode) { @case ('CAMPAIGN_CANNOT_BE_FINISHED') { {{
+		'campaigns.list.finishErrors.cannotBeFinished' | translate }} } @default { {{ finishError()?.message }} } }
 	</p>
 	}
 </app-confirm-dialog-organism>

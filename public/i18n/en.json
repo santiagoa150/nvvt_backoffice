@@ -91,6 +91,7 @@
 			"viewAction": "View details",
 			"deleteAction": "Delete campaign",
 			"activateAction": "Activate campaign",
+			"finishAction": "Finish campaign",
 			"table": {
 				"name": "Name",
 				"year": "Year",
@@ -107,9 +108,24 @@
 					"cannotBeDeleted": "Only scheduled campaigns can be deleted."
 				}
 			},
+			"activateConfirm": {
+				"title": "Activate campaign",
+				"message": "Are you sure you want to activate the campaign \"{{name}}\"?",
+				"confirm": "Activate",
+				"cancel": "Cancel"
+			},
+			"finishConfirm": {
+				"title": "Finish campaign",
+				"message": "Are you sure you want to finish the campaign \"{{name}}\"? This action cannot be undone.",
+				"confirm": "Finish",
+				"cancel": "Cancel"
+			},
 			"activateErrors": {
 				"activeCampaignAlreadyExists": "An active campaign already exists. You must deactivate it before activating this one.",
 				"campaignAlreadyActive": "This campaign is already active."
+			},
+			"finishErrors": {
+				"cannotBeFinished": "Only active campaigns can be finished."
 			}
 		},
 		"detail": {
@@ -261,9 +277,11 @@
 			"title": "Notifications",
 			"description": "See every notification you've received.",
 			"empty": "No notifications",
+			"goToCampaign": "Go to campaign",
 			"table": {
 				"action": "Action",
-				"status": "Status"
+				"status": "Status",
+				"actions": "Actions"
 			},
 			"status": {
 				"seen": "Seen",

@@ -72,8 +72,13 @@ export class CampaignDetailPage {
 	protected readonly isDeleting = signal(false);
 	protected readonly deleteError = signal<AppError | null>(null);
 
+	protected readonly pendingActivate = signal(false);
 	protected readonly isActivating = signal(false);
 	protected readonly activateError = signal<AppError | null>(null);
+
+	protected readonly pendingFinish = signal(false);
+	protected readonly isFinishing = signal(false);
+	protected readonly finishError = signal<AppError | null>(null);
 
 	protected readonly pendingDeleteProduct = signal<Product | null>(null);
 	protected readonly isDeletingProduct = signal(false);
@@ -134,19 +139,74 @@ export class CampaignDetailPage {
 
 	/**
 	 * This method is called when the user requests to activate this campaign.
-	 * It activates it via the campaigns API and refreshes its data.
+	 * It opens the confirmation dialog.
 	 */
 	protected onActivateRequested(): void {
 		this.activateError.set(null);
+		this.pendingActivate.set(true);
+	}
+
+	/**
+	 * This method is called when the user dismisses the activate confirmation
+	 * dialog without confirming.
+	 */
+	protected onActivateDismissed(): void {
+		this.pendingActivate.set(false);
+		this.activateError.set(null);
+	}
+
+	/**
+	 * This method is called when the user confirms the activation of this
+	 * campaign. It activates it via the campaigns API and refreshes its data.
+	 */
+	protected onActivateConfirmed(): void {
 		this.isActivating.set(true);
 		this.campaignRepository.activate(this.campaignId).subscribe({
 			next: () => {
 				this.isActivating.set(false);
+				this.pendingActivate.set(false);
 				this.fetchCampaign();
 			},
 			error: (error: AppError) => {
 				this.isActivating.set(false);
 				this.activateError.set(error);
+			},
+		});
+	}
+
+	/**
+	 * This method is called when the user requests to finish this campaign.
+	 * It opens the confirmation dialog.
+	 */
+	protected onFinishRequested(): void {
+		this.finishError.set(null);
+		this.pendingFinish.set(true);
+	}
+
+	/**
+	 * This method is called when the user dismisses the finish confirmation
+	 * dialog without confirming.
+	 */
+	protected onFinishDismissed(): void {
+		this.pendingFinish.set(false);
+		this.finishError.set(null);
+	}
+
+	/**
+	 * This method is called when the user confirms the finishing of this
+	 * campaign. It finishes it via the campaigns API and refreshes its data.
+	 */
+	protected onFinishConfirmed(): void {
+		this.isFinishing.set(true);
+		this.campaignRepository.finish(this.campaignId).subscribe({
+			next: () => {
+				this.isFinishing.set(false);
+				this.pendingFinish.set(false);
+				this.fetchCampaign();
+			},
+			error: (error: AppError) => {
+				this.isFinishing.set(false);
+				this.finishError.set(error);
 			},
 		});
 	}

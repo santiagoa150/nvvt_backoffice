@@ -7,4 +7,5 @@ export interface Notification {
 	readonly action: string;
 	readonly recipient: string;
 	readonly seen: boolean;
+	readonly reference: string | null;
 }

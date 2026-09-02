@@ -1,8 +1,10 @@
 import { Component, computed, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Notification } from '../../../../../shared/domain/notification';
+import { IconButtonAtom } from '../../../../../shared/ui/atom/button/icon-button/icon-button.atom';
 import { LoadingSpinnerAtom } from '../../../../../shared/ui/atom/loading-spinner/loading-spinner.atom';
-import { getNotificationActionTranslationKey } from '../../../domain/notification-action';
+import { getNotificationActionTranslationKey, isCampaignReferenceAction } from '../../../domain/notification-action';
 import { EmptyNotificationsMolecule } from '../empty-notifications/empty-notifications.molecule';
 
 const ROW_HEIGHT_PX = 65;
@@ -18,7 +20,7 @@ const ROW_HEIGHT_PX = 65;
 @Component({
 	selector: 'app-notification-table-molecule',
 	templateUrl: './notification-table.molecule.html',
-	imports: [TranslatePipe, LoadingSpinnerAtom, EmptyNotificationsMolecule],
+	imports: [TranslatePipe, RouterLink, IconButtonAtom, LoadingSpinnerAtom, EmptyNotificationsMolecule],
 })
 export class NotificationTableMolecule {
 	public readonly notifications = input.required<Notification[]>();
@@ -34,5 +36,9 @@ export class NotificationTableMolecule {
 
 	protected getActionTranslationKey(action: string): string | null {
 		return getNotificationActionTranslationKey(action);
+	}
+
+	protected hasCampaignShortcut(notification: Notification): boolean {
+		return isCampaignReferenceAction(notification.action) && !!notification.reference;
 	}
 }
