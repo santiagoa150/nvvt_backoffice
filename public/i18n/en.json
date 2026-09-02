@@ -255,5 +255,24 @@
 			"label": "Cart ID",
 			"description": "The ID of the cart used when adding products from the provider."
 		}
+	},
+	"notifications": {
+		"list": {
+			"title": "Notifications",
+			"description": "See every notification you've received.",
+			"empty": "No notifications",
+			"table": {
+				"action": "Action",
+				"status": "Status"
+			},
+			"status": {
+				"seen": "Seen",
+				"unseen": "New"
+			}
+		},
+		"actions": {
+			"CART_LOADED": "Cart loaded",
+			"CART_LOAD_FAILED": "Cart load failed"
+		}
 	}
 }

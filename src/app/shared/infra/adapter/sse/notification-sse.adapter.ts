@@ -1,19 +1,38 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
+import { HttpClientAdapter } from '../http/http-client.adapter';
 import { Notification } from '../../../domain/notification';
+import { Pagination } from '../../../domain/pagination';
 import { NotificationRepository } from '../../../domain/repository/notification.repository';
 import { TokenRepository } from '../../../domain/repository/token.repository';
 import { SharedInjectionTokens } from '../../../shared.injection-tokens';
 
+interface NotificationResponse {
+	readonly notification_id: string;
+	readonly action: string;
+	readonly recipient: string;
+	readonly seen: boolean;
+}
+
+interface PaginationResponse<T> {
+	readonly data: T[];
+	readonly metadata: {
+		readonly total: number;
+		readonly total_pages: number;
+		readonly page: number;
+	};
+}
+
 /**
- * Adapter that streams notifications over Server-Sent Events using fetch,
- * since the native EventSource API can't attach the Authorization header
- * the backend requires.
+ * Adapter that streams notifications over Server-Sent Events using fetch
+ * (since the native EventSource API can't attach the Authorization header
+ * the backend requires), and reads/updates them over the regular HTTP API.
  */
 @Injectable({ providedIn: 'root' })
 export class NotificationSseAdapter implements NotificationRepository {
 	private readonly tokenRepository = inject<TokenRepository>(SharedInjectionTokens.TOKEN_REPOSITORY);
+	private readonly http = inject(HttpClientAdapter);
 
 	stream(): Observable<Notification> {
 		return new Observable<Notification>((subscriber) => {
@@ -33,6 +52,16 @@ export class NotificationSseAdapter implements NotificationRepository {
 
 			return () => controller.abort();
 		});
+	}
+
+	getPaginated(page: number, limit: number): Observable<Pagination<Notification>> {
+		return this.http
+			.get<PaginationResponse<NotificationResponse>>('/notifications/', { params: { page, limit } })
+			.pipe(map((response) => this.toPagination(response)));
+	}
+
+	markAsSeen(notificationIds: string[]): Observable<void> {
+		return this.http.patch<void>('/notifications/seen', { notification_ids: notificationIds });
 	}
 
 	private async consume(
@@ -75,6 +104,26 @@ export class NotificationSseAdapter implements NotificationRepository {
 			return null;
 		}
 
-		return JSON.parse(dataLine.slice('data:'.length).trim()) as Notification;
+		return this.toNotification(JSON.parse(dataLine.slice('data:'.length).trim()) as NotificationResponse);
+	}
+
+	private toPagination(response: PaginationResponse<NotificationResponse>): Pagination<Notification> {
+		return {
+			data: response.data.map((notification) => this.toNotification(notification)),
+			metadata: {
+				total: response.metadata.total,
+				totalPages: response.metadata.total_pages,
+				page: response.metadata.page,
+			},
+		};
+	}
+
+	private toNotification(response: NotificationResponse): Notification {
+		return {
+			notificationId: response.notification_id,
+			action: response.action,
+			recipient: response.recipient,
+			seen: response.seen,
+		};
 	}
 }

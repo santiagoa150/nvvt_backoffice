@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { campaignRoutes } from './context/campaigns/campaign.routes';
 import { clientRoutes } from './context/clients/client.routes';
+import { notificationRoutes } from './context/notifications/notification.routes';
 import { settingsRoutes } from './context/settings/settings.routes';
 import { authGuard } from './shared/infra/guard/auth.guard';
 import { MainLayout } from './shared/ui/layout/main-layout/main-layout';
@@ -20,6 +21,7 @@ export const routes: Routes = [
 			{ path: 'campaign', children: campaignRoutes, canActivate: [authGuard] },
 			{ path: 'client', children: clientRoutes, canActivate: [authGuard] },
 			{ path: 'settings', children: settingsRoutes, canActivate: [authGuard] },
+			{ path: 'notifications', children: notificationRoutes, canActivate: [authGuard] },
 		],
 	},
 ];

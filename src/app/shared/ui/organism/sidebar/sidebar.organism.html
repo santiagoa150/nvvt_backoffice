@@ -11,7 +11,9 @@
 		<img src="/images/logo.svg" alt="Novaventa" class="h-8 w-8 rounded-md" />
 		<span class="text-lg font-bold text-primary-900">Novaventa</span>
 	</div>
-	<app-notification-bell-molecule [unreadCount]="unreadNotificationsCount()" class="ml-auto" />
+	<a routerLink="/notifications" class="ml-auto">
+		<app-notification-bell-molecule [unreadCount]="notificationBadge.unreadCount()" />
+	</a>
 </div>
 } @if (isOpen()) {
 <button
@@ -39,7 +41,9 @@
 			<img src="/images/logo.svg" alt="Novaventa" class="h-8 w-8 shrink-0 rounded-md" />
 			<span class="truncate text-lg font-bold text-primary-900">Novaventa</span>
 		</div>
-		<app-notification-bell-molecule [unreadCount]="unreadNotificationsCount()" class="ml-auto sm:hidden" />
+		<a routerLink="/notifications" (click)="onModuleClick()" class="ml-auto sm:hidden">
+			<app-notification-bell-molecule [unreadCount]="notificationBadge.unreadCount()" />
+		</a>
 		}
 	</div>
 
@@ -64,7 +68,9 @@
 		class="flex items-center gap-1 border-t border-black/10 px-3 py-4"
 		[class]="isOpen() ? 'flex-row' : 'flex-col'"
 	>
-		<app-notification-bell-molecule [unreadCount]="unreadNotificationsCount()" class="hidden sm:block" />
+		<a routerLink="/notifications" (click)="onModuleClick()" class="hidden sm:block">
+			<app-notification-bell-molecule [unreadCount]="notificationBadge.unreadCount()" />
+		</a>
 		<app-language-menu-molecule variant="sidebar" (openChange)="isLanguageMenuOpen.set($event)" />
 		<button
 			type="button"

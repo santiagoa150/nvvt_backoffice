@@ -255,5 +255,24 @@
 			"label": "ID del carrito",
 			"description": "El ID del carrito usado al agregar productos desde el proveedor."
 		}
+	},
+	"notifications": {
+		"list": {
+			"title": "Notificaciones",
+			"description": "Aquí verás todas las notificaciones que has recibido.",
+			"empty": "No hay notificaciones",
+			"table": {
+				"action": "Acción",
+				"status": "Estado"
+			},
+			"status": {
+				"seen": "Vista",
+				"unseen": "Nueva"
+			}
+		},
+		"actions": {
+			"CART_LOADED": "Carrito cargado",
+			"CART_LOAD_FAILED": "Error al cargar el carrito"
+		}
 	}
 }

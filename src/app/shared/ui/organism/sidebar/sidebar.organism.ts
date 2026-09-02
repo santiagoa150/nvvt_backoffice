@@ -5,6 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { NotificationRepository } from '../../../domain/repository/notification.repository';
 import { SessionStorageRepository } from '../../../domain/repository/session-storage.repository';
 import { TokenRepository } from '../../../domain/repository/token.repository';
+import { NotificationBadgeStore } from '../../../infra/state/notification-badge.store';
 import { SharedInjectionTokens } from '../../../shared.injection-tokens';
 import { SharedProviders } from '../../../shared.providers';
 import { LanguageMenuMolecule } from '../../molecule/language-menu/language-menu.molecule';
@@ -37,12 +38,12 @@ export class SidebarOrganism {
 	private readonly notificationRepository = inject<NotificationRepository>(
 		SharedInjectionTokens.NOTIFICATION_REPOSITORY,
 	);
+	protected readonly notificationBadge = inject(NotificationBadgeStore);
 	private readonly router = inject(Router);
 	private readonly languageMenu = viewChild(LanguageMenuMolecule);
 
 	protected readonly isOpen = signal(this.readStoredOpenState());
 	protected readonly isLanguageMenuOpen = signal(false);
-	protected readonly unreadNotificationsCount = signal(0);
 	protected readonly asideClasses = computed(() => {
 		const width = this.isOpen() ? 'w-screen sm:w-64' : 'w-0 sm:w-20';
 		const overflow = this.isLanguageMenuOpen() ? 'overflow-visible' : 'overflow-hidden';
@@ -58,7 +59,7 @@ export class SidebarOrganism {
 		this.notificationRepository
 			.stream()
 			.pipe(takeUntilDestroyed())
-			.subscribe(() => this.unreadNotificationsCount.update((count) => count + 1));
+			.subscribe(() => this.notificationBadge.increment());
 	}
 
 	/**

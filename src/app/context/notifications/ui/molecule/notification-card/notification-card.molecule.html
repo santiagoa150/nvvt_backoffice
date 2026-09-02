@@ -1,0 +1,14 @@
+<div class="flex items-start justify-between gap-3 rounded-2xl border border-neutral-300 p-4">
+	<p class="text-lg" [class]="notification().seen ? 'text-neutral-600' : 'font-bold text-black'">
+		@if (actionTranslationKey(); as actionKey) { {{ actionKey | translate }} } @else { {{ notification().action }} }
+	</p>
+	@if (notification().seen) {
+	<span class="shrink-0 rounded-full bg-neutral-200 px-2 py-0.5 text-sm font-semibold text-neutral-600">
+		{{ 'notifications.list.status.seen' | translate }}
+	</span>
+	} @else {
+	<span class="shrink-0 rounded-full bg-primary-100 px-2 py-0.5 text-sm font-semibold text-primary-700">
+		{{ 'notifications.list.status.unseen' | translate }}
+	</span>
+	}
+</div>
