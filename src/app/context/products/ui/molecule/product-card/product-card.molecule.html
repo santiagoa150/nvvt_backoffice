@@ -29,16 +29,45 @@
 		</div>
 	</div>
 
-	<div class="border-t border-neutral-100 pt-3 text-left sm:shrink-0 sm:border-t-0 sm:pt-0 sm:text-right">
-		<p class="text-base text-neutral-500">
-			{{ 'products.card.listPrice' | translate }}:
-			<app-price-atom [value]="product().listPrice" class="font-semibold text-black" />
+	<div class="border-t border-neutral-100 pt-3 text-left sm:shrink-0 sm:border-t-0 sm:pt-0">
+		<button
+			type="button"
+			class="flex cursor-pointer items-center gap-1 text-lg text-black"
+			(click)="toggleListPriceUnit()"
+		>
+			<span
+				class="material-icons text-base text-primary-600 transition-transform"
+				[class.rotate-90]="isListPriceUnitVisible()"
+				>arrow_right</span
+			>
+			{{ 'products.card.totalListPrice' | translate }}:
+			<app-price-atom [value]="totalListPrice()" class="font-bold" />
+		</button>
+		@if (isListPriceUnitVisible()) {
+		<p class="ml-5 text-xs text-neutral-400">
+			{{ 'products.card.listPrice' | translate }}: <app-price-atom [value]="product().listPrice" />
 		</p>
-		<p class="text-sm text-neutral-400">
+		}
+
+		<button
+			type="button"
+			class="mt-1 flex cursor-pointer items-center gap-1 text-base text-neutral-700"
+			(click)="toggleCatalogPriceUnit()"
+		>
+			<span
+				class="material-icons text-base text-primary-600 transition-transform"
+				[class.rotate-90]="isCatalogPriceUnitVisible()"
+				>arrow_right</span
+			>
+			{{ 'products.card.totalCatalogPrice' | translate }}:
+			<app-price-atom [value]="totalCatalogPrice()" class="font-semibold" />
+		</button>
+		@if (isCatalogPriceUnitVisible()) {
+		<p class="ml-5 text-xs text-neutral-400">
 			{{ 'products.card.catalogPrice' | translate }}: <app-price-atom [value]="product().catalogPrice" />
 		</p>
-		@if (hasMultipleInstallments()) {
-		<div class="mt-1 flex flex-wrap gap-x-2 text-sm text-neutral-400 sm:justify-end">
+		} @if (hasMultipleInstallments()) {
+		<div class="mt-1 flex flex-wrap gap-x-2 text-sm text-neutral-400">
 			@for (amount of product().installmentAmounts; track $index) {
 			<span
 				>{{ 'products.card.installment' | translate: { number: $index + 1 } }}:

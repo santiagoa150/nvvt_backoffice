@@ -227,6 +227,8 @@
 			"quantity": "Cantidad",
 			"installments": "Cuotas",
 			"page": "Página",
+			"totalListPrice": "Precio lista",
+			"totalCatalogPrice": "Precio catálogo",
 			"listPrice": "Precio lista unitario",
 			"catalogPrice": "Precio catálogo unitario",
 			"installment": "Cuota {{number}}",

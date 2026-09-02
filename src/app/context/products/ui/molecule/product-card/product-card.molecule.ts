@@ -29,6 +29,11 @@ export class ProductCardMolecule {
 
 	protected readonly isOutOfStock = computed(() => this.product().status === 'OUT_OF_STOCK');
 	protected readonly hasMultipleInstallments = computed(() => this.product().installments > 1);
+	protected readonly totalListPrice = computed(() => this.product().listPrice * this.product().quantity);
+	protected readonly totalCatalogPrice = computed(() => this.product().catalogPrice * this.product().quantity);
+
+	protected readonly isListPriceUnitVisible = signal(false);
+	protected readonly isCatalogPriceUnitVisible = signal(false);
 
 	protected readonly pendingQuantity = signal(0);
 	protected readonly isUpdatingQuantity = signal(false);
@@ -40,6 +45,14 @@ export class ProductCardMolecule {
 		effect(() => {
 			this.pendingQuantity.set(this.product().quantity);
 		});
+	}
+
+	protected toggleListPriceUnit(): void {
+		this.isListPriceUnitVisible.update((isVisible) => !isVisible);
+	}
+
+	protected toggleCatalogPriceUnit(): void {
+		this.isCatalogPriceUnitVisible.update((isVisible) => !isVisible);
 	}
 
 	protected onDecrement(): void {

@@ -227,6 +227,8 @@
 			"quantity": "Quantity",
 			"installments": "Installments",
 			"page": "Page",
+			"totalListPrice": "List price",
+			"totalCatalogPrice": "Catalog price",
 			"listPrice": "Unit list price",
 			"catalogPrice": "Unit catalog price",
 			"installment": "Installment {{number}}",
