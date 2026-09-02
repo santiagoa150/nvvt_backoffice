@@ -14,4 +14,7 @@ export const SharedInjectionTokens: Record<SharedProvidersConstants, InjectionTo
 	[SharedProvidersConstants.SESSION_STORAGE_REPOSITORY]: new InjectionToken<unknown>(
 		SharedProvidersConstants.SESSION_STORAGE_REPOSITORY,
 	),
+	[SharedProvidersConstants.NOTIFICATION_REPOSITORY]: new InjectionToken<unknown>(
+		SharedProvidersConstants.NOTIFICATION_REPOSITORY,
+	),
 };

@@ -1,10 +1,14 @@
 import { Component, computed, inject, signal, viewChild } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { NotificationRepository } from '../../../domain/repository/notification.repository';
 import { SessionStorageRepository } from '../../../domain/repository/session-storage.repository';
 import { TokenRepository } from '../../../domain/repository/token.repository';
 import { SharedInjectionTokens } from '../../../shared.injection-tokens';
+import { SharedProviders } from '../../../shared.providers';
 import { LanguageMenuMolecule } from '../../molecule/language-menu/language-menu.molecule';
+import { NotificationBellMolecule } from '../../molecule/notification-bell/notification-bell.molecule';
 
 interface SidebarModule {
 	readonly icon: string;
@@ -22,18 +26,23 @@ const SIDEBAR_OPEN_STORAGE_KEY = 'nvvt_sidebar_open';
 @Component({
 	selector: 'app-sidebar-organism',
 	templateUrl: './sidebar.organism.html',
-	imports: [RouterLink, RouterLinkActive, TranslatePipe, LanguageMenuMolecule],
+	imports: [RouterLink, RouterLinkActive, TranslatePipe, LanguageMenuMolecule, NotificationBellMolecule],
+	providers: [SharedProviders.NOTIFICATION_REPOSITORY],
 })
 export class SidebarOrganism {
 	private readonly tokenRepository = inject<TokenRepository>(SharedInjectionTokens.TOKEN_REPOSITORY);
 	private readonly sessionStorageRepository = inject<SessionStorageRepository>(
 		SharedInjectionTokens.SESSION_STORAGE_REPOSITORY,
 	);
+	private readonly notificationRepository = inject<NotificationRepository>(
+		SharedInjectionTokens.NOTIFICATION_REPOSITORY,
+	);
 	private readonly router = inject(Router);
 	private readonly languageMenu = viewChild(LanguageMenuMolecule);
 
 	protected readonly isOpen = signal(this.readStoredOpenState());
 	protected readonly isLanguageMenuOpen = signal(false);
+	protected readonly unreadNotificationsCount = signal(0);
 	protected readonly asideClasses = computed(() => {
 		const width = this.isOpen() ? 'w-screen sm:w-64' : 'w-0 sm:w-20';
 		const overflow = this.isLanguageMenuOpen() ? 'overflow-visible' : 'overflow-hidden';
@@ -44,6 +53,13 @@ export class SidebarOrganism {
 		{ icon: 'group', labelKey: 'sidebar.modules.clients', route: '/client' },
 		{ icon: 'settings', labelKey: 'sidebar.modules.settings', route: '/settings' },
 	];
+
+	constructor() {
+		this.notificationRepository
+			.stream()
+			.pipe(takeUntilDestroyed())
+			.subscribe(() => this.unreadNotificationsCount.update((count) => count + 1));
+	}
 
 	/**
 	 * This method is called when the user clicks the hamburger icon.

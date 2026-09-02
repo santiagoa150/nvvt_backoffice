@@ -1,0 +1,14 @@
+<div class="relative">
+	<app-icon-button-atom
+		icon="notifications"
+		color="primary-container"
+		[attr.title]="'sidebar.notifications' | translate"
+	/>
+	@if (unreadCount() > 0) {
+	<span
+		class="pointer-events-none absolute top-0.5 right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary-600 px-1 text-[10px] leading-none font-bold text-white"
+	>
+		{{ displayCount() }}
+	</span>
+	}
+</div>

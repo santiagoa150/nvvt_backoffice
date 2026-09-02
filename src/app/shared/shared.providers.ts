@@ -2,6 +2,7 @@ import { SharedProvidersConstants } from './shared.providers.constants';
 import { Provider } from '@angular/core';
 import { AuthApiAdapter } from './infra/adapter/http/auth-api.adapter';
 import { NgxTranslateAdapter } from './infra/adapter/i18n/ngx-translate.adapter';
+import { NotificationSseAdapter } from './infra/adapter/sse/notification-sse.adapter';
 import { LocalStorageTokenAdapter } from './infra/adapter/storage/local-storage-token.adapter';
 import { SessionStorageAdapter } from './infra/adapter/storage/session-storage.adapter';
 import { SharedInjectionTokens } from './shared.injection-tokens';
@@ -26,5 +27,9 @@ export const SharedProviders: Record<SharedProvidersConstants, Provider> = {
 	[SharedProvidersConstants.SESSION_STORAGE_REPOSITORY]: {
 		provide: SharedInjectionTokens.SESSION_STORAGE_REPOSITORY,
 		useClass: SessionStorageAdapter,
+	},
+	[SharedProvidersConstants.NOTIFICATION_REPOSITORY]: {
+		provide: SharedInjectionTokens.NOTIFICATION_REPOSITORY,
+		useClass: NotificationSseAdapter,
 	},
 };
